@@ -1,0 +1,108 @@
+# The exact environment this release was tested in, frozen.
+#
+#     python3.11 -m venv .venv
+#     . .venv/bin/activate
+#     pip install -r requirements.txt
+#     pip install -e .
+#
+# Python 3.11. torch and torchvision are the CUDA 12.8 builds, from the PyTorch
+# index named below, and run on NVIDIA GPUs from Turing (sm_75) to Blackwell
+# (sm_120). Everything else comes from PyPI. numba-cuda brings the CUDA
+# compiler the simulator's kernels are built with, through
+# nvidia-cuda-nvcc-cu12, so no system CUDA toolkit is needed.
+#
+# Only fourteen of these are imported by this tree, plus numba's CUDA target.
+# The rest came with the training environment and are kept so it reproduces
+# exactly. pyproject.toml carries the loose runtime set if you would rather
+# resolve fresh.
+
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+accelerate==1.9.0
+certifi==2025.8.3
+charset-normalizer==3.4.2
+contourpy==1.3.0
+cuda-bindings==12.9.7
+cuda-core==1.2.0
+cuda-pathfinder==1.6.0
+cuda-toolkit==12.8.1
+cupy-cuda12x==13.5.1
+cycler==0.12.1
+Cython==3.1.4
+fastrlock==0.8.3
+filelock==3.18.0
+fonttools==4.58.1
+fsspec==2025.7.0
+h5py==3.14.0
+hf-xet==1.1.5
+huggingface-hub==0.34.3
+idna==3.10
+imageio==2.37.0
+imageio-ffmpeg==0.6.0
+importlib_metadata==8.7.0
+importlib_resources==6.5.2
+Jinja2==3.1.6
+joblib==1.5.1
+kiwisolver==1.4.7
+lightning-utilities==0.15.2
+llvmlite==0.45.1
+MarkupSafe==3.0.2
+matplotlib==3.9.4
+mpmath==1.3.0
+networkx==3.2.1
+numba==0.62.1
+numba-cuda==0.30.4
+numpy==2.0.2
+nvidia-cublas-cu12==12.8.4.1
+nvidia-cuda-cccl-cu12==12.8.90
+nvidia-cuda-cupti-cu12==12.8.90
+nvidia-cuda-nvcc-cu12==12.8.93
+nvidia-cuda-nvrtc-cu12==12.8.93
+nvidia-cuda-runtime-cu12==12.8.90
+nvidia-cudnn-cu12==9.19.0.56
+nvidia-cufft-cu12==11.3.3.83
+nvidia-cufile-cu12==1.13.1.3
+nvidia-curand-cu12==10.3.9.90
+nvidia-cusolver-cu12==11.7.3.90
+nvidia-cusparse-cu12==12.5.8.93
+nvidia-cusparselt-cu12==0.7.1
+nvidia-nccl-cu12==2.28.9
+nvidia-nvcomp-cu12==5.0.0.6
+nvidia-nvjitlink-cu12==12.8.93
+nvidia-nvshmem-cu12==3.4.5
+nvidia-nvtx-cu12==12.8.90
+opencv-python==4.11.0.86
+packaging==25.0
+pandas==2.3.1
+pillow==11.2.1
+psutil==7.0.0
+pycollada==0.9.3
+pyparsing==3.2.3
+python-dateutil==2.9.0.post0
+pytz==2025.2
+PyYAML==6.0.2
+regex==2025.7.34
+requests==2.32.4
+safetensors==0.5.3
+scikit-learn==1.6.1
+scipy==1.13.1
+seaborn==0.13.2
+segmentation_models_pytorch==0.5.0
+six==1.17.0
+sympy==1.14.0
+threadpoolctl==3.6.0
+timm==1.0.19
+torch==2.11.0+cu128
+torchmetrics==1.8.1
+torchvision==0.26.0+cu128
+tqdm==4.67.1
+trimesh==4.12.2
+triton==3.6.0
+typing_extensions==4.14.1
+tzdata==2025.2
+urllib3==2.5.0
+zipp==3.22.0
+
+# tests and lint
+pytest>=7.4
+ruff>=0.4
