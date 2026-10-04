@@ -1,5 +1,7 @@
 <div align="center">
 
+# IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware Planning
+
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
 ![CUDA](https://img.shields.io/badge/CUDA-Required-76B900?style=flat-square&logo=nvidia&logoColor=white)
@@ -7,8 +9,6 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 <img src="assets/intelx-wordmark.svg" alt="IntelX" width="470">
-
-# IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware Planning
 
 Saurav Dosi, Itay Kadosh, Yu Xiang
 
