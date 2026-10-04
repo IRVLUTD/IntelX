@@ -1,22 +1,30 @@
-<div align="center">
+<h1 align="center">IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware Planning</h1>
 
-# IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware Planning
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C?style=flat-square&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/CUDA-Required-76B900?style=flat-square&logo=nvidia&logoColor=white" alt="CUDA">
+  <img src="https://img.shields.io/badge/ICRA%202027-Under%20Review-00629B?style=flat-square&logo=ieee&logoColor=white" alt="ICRA 2027">
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="License">
+</p>
 
-![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![CUDA](https://img.shields.io/badge/CUDA-Required-76B900?style=flat-square&logo=nvidia&logoColor=white)
-![ICRA 2027](https://img.shields.io/badge/ICRA%202027-Under%20Review-00629B?style=flat-square&logo=ieee&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+<p align="center">
+  <img src="assets/intelx-wordmark.svg" alt="IntelX" width="470">
+</p>
 
-<img src="assets/intelx-wordmark.svg" alt="IntelX" width="470">
+<p align="center">
+  <a href="https://sauravdosi.com/"><strong>Saurav Dosi</strong></a>
+  ·
+  <a href="https://www.linkedin.com/in/itay-kadosh/"><strong>Itay Kadosh</strong></a>
+  ·
+  <a href="https://yuxng.github.io/"><strong>Yu Xiang</strong></a>
+</p>
 
-Saurav Dosi, Itay Kadosh, Yu Xiang
+<p align="center">
+  <a href="https://labs.utdallas.edu/irvl/">Intelligent Robotics and Vision Lab</a>, Department of Computer Science, The University of Texas at Dallas
+</p>
 
-Department of Computer Science, The University of Texas at Dallas
-
-[Project Page](<PROJECT_PAGE_LINK>) · [arXiv](<ARXIV_LINK>)
-
-</div>
+<h3 align="center"><a href="<ARXIV_LINK>">arXiv</a> | <a href="<PROJECT_PAGE_LINK>">Project Page</a> | <a href="<VIDEO_LINK>">Video</a></h3>
 
 One U-Net regresses, over a robot-frame occupancy image, how much new area the
 sensor would gain from each nearby goal. The planner reads angular components
