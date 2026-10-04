@@ -36,7 +36,7 @@ class VisualizationMixin:
             local = bool(getattr(self.config, 'LOCAL_ONLY_MODE', False))
             self._live_view = LiveView(
                 self.simulator.occ, method='local_only' if local else 'ours',
-                title=("IntelX, local only: %s" if local else "IntelX: %s")
+                title=("IntelX, Local Only: %s" if local else "IntelX: %s")
                 % pretty_map_name(stem),
                 spawn=getattr(self, 'spawn_pose', None), fov=sim.get('FOV'),
                 max_r_px=sim.get('MAX_R'), win_px=sim.get('WIN_PX', 400),

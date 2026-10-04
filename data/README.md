@@ -5,9 +5,10 @@ inputs. `data/coverage` holds the generated training set, which the collectors
 write and training reads. They are separate roots because a coverage chunk is
 not a floor plan and the two are usually on different disks.
 
-Only three sample maps are committed, one of each kind, listed in the README.
-The training set is not. Point either root elsewhere with an environment
-variable and change nothing in the source.
+The full set of maps is at [Maps](<MAPS_LINK>) and the coverage dataset at
+[Dataset](<DATASET_LINK>). Three of the maps are included, one of each kind,
+listed in the README. Point either root elsewhere with an environment variable
+and change nothing in the source.
 
 ```bash
 export INTELX_MAPS_ROOT=/path/to/your/maps
@@ -35,17 +36,16 @@ data/maps/
 
 ### Sources
 
-Every source dataset is public and separately available. KTH floor plans,
-HouseExpo, Modified Swiss Dwellings and the AWS RoboMaker worlds each carry
-their own licence, which is why the standardised PGMs are not committed here.
-Either drop the standardised maps into the tree above, or add the script that
-regenerates them from the originals.
+The maps are standardised from four public datasets, each under its own
+licence: KTH floor plans, HouseExpo, Modified Swiss Dwellings and the AWS
+RoboMaker worlds. The standardised set from [Maps](<MAPS_LINK>) unpacks into the
+tree above.
 
 `data/train_metadata.csv` lists the 18 training maps with the shows each
 receives, Table 1 of the paper, allocated in proportion to the complexity
 score of Eq. (1). `intelx.cli.collect_data` reads it.
 
-## The coverage dataset
+## The Coverage Dataset
 
 `intelx.paths.dataset_path` resolves everything the collectors write and
 everything training reads, under `data/coverage`.
@@ -57,6 +57,8 @@ data/coverage/
   dense_data/<map>/        what a single-map run of intelx.data.driver writes
 ```
 
-Generate it rather than downloading it. `python -m intelx.cli.collect_data`
-runs the collection across every map in `INTELX_MAPS_ROOT`, and it is a long
-multi-GPU job, so read the constants at the top of that file first.
+Download it from [Dataset](<DATASET_LINK>), or generate it.
+`python -m intelx.cli.collect_data` runs the collection across every map in
+`INTELX_MAPS_ROOT`, and it is a long multi-GPU job, so read the constants at the
+top of that file first. `<CHUNKING_SCRIPT>` then packs what it writes into
+`train_chunks/`.

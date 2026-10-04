@@ -1,8 +1,5 @@
 # Checkpoints
 
-The trained checkpoint is a separate download, because it is past what a git
-host will take.
-
 **Download:** [`checkpoint_best.pth`](<GOOGLE_DRIVE_LINK>), 293.4 MB. Put it in
 this directory.
 
@@ -23,14 +20,14 @@ somewhere else, redirect the root rather than editing a source file.
 export INTELX_WEIGHTS_ROOT=/path/to/your/checkpoints
 ```
 
-## What it is
+## What It Is
 
 | | |
 |---|---|
-| architecture | U-Net with a ResNet-34 encoder, `intelx.models.unet` |
-| parameters | 24,423,009, plus 18,988 BatchNorm buffer values |
-| selected at | epoch 31, validation R² 0.357 |
-| format | the training checkpoint as `intelx.cli.train` writes it |
+| Architecture | U-Net with a ResNet-34 encoder, `intelx.models.unet` |
+| Parameters | 24,423,009, plus 18,988 BatchNorm buffer values |
+| Selection | epoch 31, validation R² 0.357 |
+| Format | the training checkpoint as `intelx.cli.train` writes it |
 
 It is the full training checkpoint, so it carries `model_state_dict` together
 with `optimizer_state_dict`, `epoch`, `val_r2` and `val_loss`. The AdamW

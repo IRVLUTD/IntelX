@@ -1,11 +1,11 @@
-# Prediction-baseline service
+# Prediction-Baseline Service
 
 `mapex_service.py` serves MapEx, UPEN and IG-Hector planning decisions over a
 local socket, so the sweep can use them as baselines from a different python
 environment. Only the `mapex`, `upen` and `hectoraug` methods need it. Every
 other method, `ours` included, runs without it.
 
-## Why it is not run from here
+## Why It Runs Inside MapEx
 
 It calls MapEx's own planner rather than a reimplementation of it, so it has
 to run inside MapEx's environment, with MapEx's modules importable and the
@@ -15,7 +15,7 @@ Calling their code unmodified is the point. Reimplementing their
 information-gain maths is how a baseline ends up accidentally crippled, so the
 only thing this file contains is format and coordinate conversion.
 
-## Installing it
+## Installation
 
 1. Install MapEx and its `lama` conda environment by their instructions.
 2. Copy `services/mapex_service.py` into MapEx's own `scripts/` directory,
@@ -41,7 +41,7 @@ python mapex_service.py --selftest-client --port 5555
 The sweep expects it on `127.0.0.1:5555`, or on each port in
 `SWEEP.MAPEX_SERVICE_PORTS` when several workers run in parallel.
 
-## The wire protocol
+## The Wire Protocol
 
 The client is `MapExClient` in `src/intelx/baselines/tier1.py`, and it is the
 specification. A message is a 4-byte big-endian length followed by a pickle.
@@ -53,7 +53,7 @@ sock.sendall(struct.pack(">I", len(data)) + data)
 
 Two requests arrive.
 
-| request | reply |
+| Request | Reply |
 |---|---|
 | `{"cmd": "ping"}` | anything truthy |
 | a plan request, below | a plan reply, below |
@@ -99,7 +99,7 @@ non-null `fallback` as unreportable for that method.
 A reply with `ok: False` is recorded as a failure rather than crashing the
 sweep, and the client reconnects on its own.
 
-## Checking the client without the service
+## Checking the Client Without the Service
 
 `python -m intelx.baselines.tier1` starts a mock service on a random port and
 exercises the client against it, including the unreachable-service path.

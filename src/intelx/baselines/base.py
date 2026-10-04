@@ -1,13 +1,12 @@
-"""PLACEHOLDER. intelx.baselines.base is not in this tree yet.
+"""Placeholder for intelx.baselines.base.
 
-Supplies UpdatedGoalBasedAutonomousExplorer, create_model_for_inference,
-the explorer the simple baselines subclass, kept as a fallback for intelx.baselines.frontier.
-
-Drop the real module in at this path and delete everything below.
+Supplies UpdatedGoalBasedAutonomousExplorer and create_model_for_inference, the
+explorer the simple baselines subclass, kept as a fallback for
+intelx.baselines.frontier, which is tried first. Replace this file with the
+module.
 """
 
 raise ModuleNotFoundError(
-    "intelx.baselines.base has not been added to this repository yet. "
-    "It supplies UpdatedGoalBasedAutonomousExplorer, create_model_for_inference. "
-    "See the Install section of README.md."
+    "intelx.baselines.base is a placeholder. It supplies "
+    "UpdatedGoalBasedAutonomousExplorer and create_model_for_inference."
 )

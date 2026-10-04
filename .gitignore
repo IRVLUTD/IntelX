@@ -26,7 +26,7 @@ Thumbs.db
 .anonymity-denylist
 ANONYMITY.md
 
-# run artefacts. Results are reproduced, not committed.
+# Run artefacts.
 results/*
 !results/.gitkeep
 sweep_out/
@@ -40,8 +40,8 @@ decisions.csv
 run_data.csv
 spawns.json
 
-# The generated coverage data, and any training checkpoint, are reproduced
-# rather than committed. See data/README.md and weights/README.md.
+# The generated coverage data and training checkpoints. See data/README.md
+# and weights/README.md.
 *.pth
 *.ckpt
 *.npz
@@ -49,9 +49,8 @@ spawns.json
 data/coverage/**
 !data/coverage/.gitkeep
 
-# Maps are ignored by default, because the full set is far past what a git
-# host will take. The ones this release ships are named one by one below, so
-# adding a map is a deliberate act and never an accident. The negations come
+# Maps are ignored by default. The included ones are named one by one below,
+# so adding a map is a deliberate act and never an accident. The negations come
 # last so they win over the patterns above. Git cannot re-include a file whose
 # parent directory is excluded, so the directories themselves are re-included
 # first; the files in them stay ignored unless they are named.
@@ -62,8 +61,7 @@ data/maps/**
 !data/maps/test_standardized/small_office3.pgm
 !data/maps/ood_test_standardized/aws_maps/hospital.pgm
 
-# Checkpoints are never committed. The trained one is a separate download, see
-# weights/README.md.
+# Checkpoints, see weights/README.md.
 weights/*
 !weights/.gitkeep
 !weights/README.md

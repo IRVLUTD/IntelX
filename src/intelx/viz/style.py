@@ -25,10 +25,10 @@ THEME = dict(bg=(248, 248, 248), panel=(255, 255, 255), unknown=(150, 150, 150),
 # Method order, labels and trail colours, as in the paper's figures.
 ORDER = ["random", "nearest", "cost_utility", "geom_ig", "frontier",
          "hectoraug", "upen", "mapex", "local_only", "ours"]
-LABEL = {"random": "Random frontier", "nearest": "Nearest frontier",
-         "cost_utility": "Cost-utility", "geom_ig": "Geometric IG",
+LABEL = {"random": "Random Frontier", "nearest": "Nearest Frontier",
+         "cost_utility": "Cost-Utility", "geom_ig": "Geometric IG",
          "frontier": "Frontier (AutoX)", "hectoraug": "IG-Hector",
-         "upen": "UPEN", "mapex": "MapEx", "local_only": "IntelX, local only",
+         "upen": "UPEN", "mapex": "MapEx", "local_only": "IntelX, Local Only",
          "ours": "IntelX (Ours)"}
 COLOR_HEX = {"random": "#9AA3AE", "nearest": "#B49A5E", "cost_utility": "#9B7BD4",
              "geom_ig": "#56B4E9", "frontier": "#F0A830", "hectoraug": "#E48BC0",

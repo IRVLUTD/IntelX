@@ -24,7 +24,7 @@ circle without gaining coverage.
 
 SUBMITTED_BEHAVIOUR = True in the config restores the rules the submitted
 results were produced with: L counted as the number of waypoints in the
-post-processed A* path, Cost-utility as explore_lite's POTENTIAL*L - GAIN*size,
+post-processed A* path, Cost-Utility as explore_lite's POTENTIAL*L - GAIN*size,
 Geometric IG as (unobserved cells in a disk) / L, and a pass with every
 frontier beyond the local window ending the run when it found no goal.
 

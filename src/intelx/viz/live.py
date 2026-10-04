@@ -150,9 +150,9 @@ class LiveView:
         self.intelx = method in INTELX_METHODS
         self.title = title or S.method_label(method)
         if subtitle is None:
-            subtitle = ("Predicted coverage-gain field overlaid in the world frame"
+            subtitle = ("Predicted Coverage-Gain Field Overlaid in the World Frame"
                         if self.intelx else
-                        "Frontier candidates and the goal chosen, in the world frame")
+                        "Frontier Candidates and the Goal Chosen, in the World Frame")
         self.subtitle = subtitle
         self.spawn = spawn
         self.fov, self.max_r, self.win = float(fov), int(max_r_px), int(win_px)
@@ -518,9 +518,9 @@ class LiveView:
                        T['text'], 'la')]
         else:
             done = status == 'complete'
-            items += [(hx, y + 110, "Run ended", 'body', 13, T['muted'], 'la'),
+            items += [(hx, y + 110, "Run Ended", 'body', 13, T['muted'], 'la'),
                       (hx, y + 132, "Complete" if done else
-                       status.replace('_', ' ').capitalize(), 'display', 22,
+                       status.replace('_', ' ').title(), 'display', 22,
                        T['ok'] if done else T['bad'], 'la')]
         rows = []
         if self.intelx:
@@ -532,7 +532,7 @@ class LiveView:
         rows += [("Goals", "%d" % s.get('goals', 0))]
         if s.get('elapsed_s') is not None:
             m_, s_ = divmod(int(s['elapsed_s']), 60)
-            rows += [("Wall time", "%d:%02d" % (m_, s_))]
+            rows += [("Wall Time", "%d:%02d" % (m_, s_))]
         for j, (k, v) in enumerate(rows[:self._stat_rows()]):
             items.append((hx, y + 178 + 26 * j, "%-12s %s" % (k, v), 'mono', 17,
                           T['text'], 'la'))

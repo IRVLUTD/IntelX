@@ -438,7 +438,7 @@ class SWEEP:
         # --- baselines -------------------------------------------------------
         # False runs every baseline as its cited paper defines it. True restores
         # the behaviour the submitted results were produced with: the travel
-        # cost counted in waypoints, the original Cost-utility and Geometric IG
+        # cost counted in waypoints, the original Cost-Utility and Geometric IG
         # scores, the one-pass exhaustion (see intelx.baselines.simple), and A*
         # refusing to plan from a robot one pixel inside a wall
         # (intelx.common.START_SNAP_PX).

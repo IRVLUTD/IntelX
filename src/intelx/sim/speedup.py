@@ -1,13 +1,10 @@
-"""PLACEHOLDER. intelx.sim.speedup is not in this tree yet.
+"""Placeholder for intelx.sim.speedup.
 
-Supplies the numba kernels,
-the accelerated inner loops the simulator calls.
-
-Drop the real module in at this path and delete everything below.
+Supplies the numba kernels, the accelerated inner loops the simulator calls.
+Its one call site runs the simulator without them. Replace this file with the
+module.
 """
 
 raise ModuleNotFoundError(
-    "intelx.sim.speedup has not been added to this repository yet. "
-    "It supplies the numba kernels. "
-    "See the Install section of README.md."
+    "intelx.sim.speedup is a placeholder. It supplies the numba kernels."
 )

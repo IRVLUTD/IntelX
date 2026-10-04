@@ -1,16 +1,19 @@
 <div align="center">
 
-# IntelX
-
-**Autonomous indoor exploration by predicting local coverage gain.**
+# IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware Planning
 
 Saurav Dosi, Itay Kadosh, Yu Xiang
 
-![python](https://img.shields.io/badge/python-3.11-7F00FF?style=flat-square&logo=python&logoColor=white)
-![pytorch](https://img.shields.io/badge/PyTorch-2.1%2B-D56A1E?style=flat-square&logo=pytorch&logoColor=white)
-![cuda](https://img.shields.io/badge/CUDA-required-7F00FF?style=flat-square&logo=nvidia&logoColor=white)
-![venue](https://img.shields.io/badge/ICRA%202027-under%20review-D56A1E?style=flat-square)
-![license](https://img.shields.io/badge/license-MIT-7F00FF?style=flat-square)
+Department of Computer Science<br>
+The University of Texas at Dallas
+
+[Paper](<PAPER_LINK>) · [Video](<VIDEO_LINK>)
+
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
+![CUDA](https://img.shields.io/badge/CUDA-Required-76B900?style=flat-square&logo=nvidia&logoColor=white)
+![ICRA 2027](https://img.shields.io/badge/ICRA%202027-Under%20Review-00629B?style=flat-square&logo=ieee&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 <img src="assets/intelx-wordmark.svg" alt="IntelX" width="470">
 
@@ -33,6 +36,8 @@ Python **3.11** and an NVIDIA GPU. The simulator casts its rays in numba
 simulator does not.
 
 ```bash
+git clone https://github.com/IRVLUTD/IntelX.git
+cd IntelX
 python3.11 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
@@ -47,26 +52,37 @@ built with, so no system CUDA toolkit is needed. On an older GPU, install a
 torch build that supports it first, then `pip install -e .`, which resolves
 the rest from `pyproject.toml`, the loose set of packages this tree imports.
 
-Two modules are placeholders and raise a `ModuleNotFoundError` naming
-themselves. Neither blocks anything. `intelx.sim.speedup` is numba
-acceleration for the simulator, and its one call site swallows its absence.
-`intelx.baselines.base` is an older explorer kept only as a fallback, and
-`intelx.common` and `intelx.baselines.frontier` are tried first and both
-answer. Everything else the code imports is here. What the tree still needs is
-the trained checkpoint, a separate download, see
-[`weights/README.md`](weights/README.md).
+Then put the trained checkpoint in `weights/`, see [Downloads](#downloads).
+
+## Downloads
+
+| Item | Link | Goes In |
+|---|---|---|
+| Trained Checkpoint | [`checkpoint_best.pth`](<GOOGLE_DRIVE_LINK>), 293.4 MB | `weights/`, see [`weights/README.md`](weights/README.md) |
+| Occupancy Maps | [Maps](<MAPS_LINK>) | `data/maps/`, see [`data/README.md`](data/README.md) |
+| Coverage Dataset | [Dataset](<DATASET_LINK>) | `data/coverage/`, see [`data/README.md`](data/README.md) |
+
+Three maps are included, one of each kind.
+
+| Map | Kind |
+|---|---|
+| `data/maps/test_standardized/small_office3.pgm` | a held-out KTH floor plan |
+| `data/maps/ood_test_standardized/aws_maps/hospital.pgm` | an out-of-distribution AWS RoboMaker world |
+| `data/maps/real/real_slam_corridor.pgm` | the real corridor, from a SLAM run |
 
 ---
 
 ## Run
 
-### Training the regressor
+### Training the Regressor
 
-Three steps, in order. The first is a long multi-GPU job, so read the
-constants at the top of `collect_data.py` before starting it.
+Four steps, in order. The first is a long multi-GPU job, so read the
+constants at the top of `collect_data.py` before starting it. With the coverage
+dataset from [Downloads](#downloads), start at `train`.
 
 ```bash
 python -m intelx.cli.collect_data    # coverage data, over your maps
+<CHUNKING_SCRIPT>                    # the collected shows, as training chunks
 python -m intelx.cli.train           # the U-Net
 python -m intelx.cli.evaluate        # what it predicts, side by side
 ```
@@ -76,10 +92,9 @@ each with the number of shows Table 1 of the paper gives it, in proportion to
 its complexity score. It reads the maps from `train_standardized/` under the
 maps root, samples spawns, runs the exploration shows that record how much new
 area each goal would gain, and writes the result under `INTELX_DATASET_ROOT`.
-Three maps ship with this release, so put the full training set in place
-first. `intelx.data.driver` does one map at a time and is what the controller
-drives. `train` reads the chunked form of that data, at batch size 32 for up to
-300 epochs, keeps the checkpoint with the best validation R², and writes each
+`intelx.data.driver` does one map at a time and is what the controller drives.
+`<CHUNKING_SCRIPT>` packs the collected shows into `train_chunks/`. `train`
+reads those chunks, at batch size 32 for up to 300 epochs, keeps the checkpoint with the best validation R², and writes each
 run, with the settings it used, to `weights/runs/<name>`. `evaluate` loads a
 checkpoint and writes prediction overlays and inference timings to
 `results/evaluation_large`.
@@ -87,7 +102,7 @@ checkpoint and writes prediction overlays and inference timings to
 Everything each step reads and writes is a class attribute at the top of its
 file. None of the three takes command-line arguments.
 
-### One episode
+### One Episode
 
 ```bash
 python -m intelx.cli.run_intelx          # or: intelx-run
@@ -101,7 +116,7 @@ fallback, the goal and the decision in force. It writes the video,
 Every knob lives in `ExplorationConfig` in `src/intelx/config.py`. The ones
 that matter.
 
-| setting | default | what it does |
+| Setting | Default | What It Does |
 |---|---|---|
 | `MODEL_CHECKPOINT` | `weights_path("checkpoint_best.pth")` | the trained U-Net |
 | `MODEL_TYPE` | `resnet34` | must match the checkpoint |
@@ -114,7 +129,7 @@ that matter.
 | `LOCAL_ONLY_MODE` | `False` | `True` disables junctions and the global planner, the Section V ablation |
 | `WIN_M` / `LASER_SCAN_R` | `20` / `10` | prediction window and sensor range, in metres |
 
-### Any single method
+### Any Single Method
 
 ```bash
 python -m intelx.cli.run_method --list                     # or: intelx-method
@@ -133,7 +148,7 @@ ablations run: `BRANCH_ORDER=strongest` commits to the strongest branch first,
 `LOCAL_FIELD=geom_ig` replaces the learned field with a geometric one, and
 `--method local_only` drops the global planner.
 
-### The benchmark
+### The Benchmark
 
 ```bash
 python -m intelx.cli.run_sweep_all --selftest   # no simulator, model or GPU
@@ -146,12 +161,12 @@ start. Runs land in one `results.csv` beside a shared `spawns.json`.
 
 Ten entries are registered, nine methods and one ablation.
 
-| key | in the paper |
+| Key | In the Paper |
 |---|---|
-| `random` `nearest` `cost_utility` `geom_ig` | the four geometry-only frontier variants |
-| `frontier` | Frontier, the deployed reference |
+| `random` `nearest` `cost_utility` `geom_ig` | Random Frontier, Nearest Frontier, Cost-Utility, Geometric IG: the four geometry-only frontier variants |
+| `frontier` | Frontier (AutoX), the deployed reference |
 | `ours` | IntelX |
-| `local_only` | the IntelX ablation, local planner alone |
+| `local_only` | IntelX, Local Only: the ablation with the local planner alone |
 | `mapex` `upen` `hectoraug` | MapEx, UPEN, IG-Hector |
 
 The last three run behind a service, which must be up first. Every other
@@ -165,7 +180,7 @@ accessible, unvisited frontiers, as Yamauchi's frontier-based exploration does:
 a frontier the robot made no progress toward is set aside for a while, and one
 it has already reached is not chosen again (`VISITED_FRONTIER_M`).
 
-| key | goal chosen | after |
+| Key | Goal Chosen | Reference |
 |---|---|---|
 | `nearest` | the frontier with the shortest L | Yamauchi 1997 |
 | `random` | uniformly among the five frontiers with the shortest L | |
@@ -175,7 +190,7 @@ it has already reached is not chosen again (`VISITED_FRONTIER_M`).
 
 `SUBMITTED_BEHAVIOUR` in `PIN_CONFIG` restores the behaviour the submitted
 results were produced with. L there counts the waypoints of the post-processed
-A* path rather than measuring its length, Cost-utility is explore_lite's
+A* path rather than measuring its length, Cost-Utility is explore_lite's
 3L − size and Geometric IG is the unobserved cells in a disk divided by L,
 reached frontiers stay candidates, a pass with no frontier inside the window
 ends the run when it finds no goal, and A* refuses to plan from a robot that
@@ -193,7 +208,7 @@ python -m intelx.viz.showcase results/<run_name>          # or: intelx-showcase
 ```
 
 `services/mapex_service.py` calls MapEx's own planner rather than a
-reimplementation of it, so it does not run from this tree. Install MapEx and
+reimplementation of it, so it runs inside MapEx's environment. Install MapEx and
 its `lama` conda environment by their instructions, copy the file into MapEx's
 own `scripts/` directory beside `explore.py`, and start it from there.
 
@@ -235,7 +250,7 @@ python -m pytest tests
 The three files read the source rather than importing it, so none of them
 needs torch, CUDA or a checkpoint.
 
-| file | what it holds you to |
+| File | What It Checks |
 |---|---|
 | `test_layout.py` | every file parses, every `intelx.*` import names a module that is in the tree, no flat import survived, every package has an `__init__` |
 | `test_paths.py` | the four roots resolve inside the repository, an environment variable redirects each one, an absolute path is still honoured |
@@ -287,7 +302,7 @@ assets/                the wordmark
 
 ## Modules
 
-| module | what it holds |
+| Module | What It Holds |
 |---|---|
 | `intelx.config` | `ExplorationConfig`. Nothing here is policy |
 | `intelx.paths` | `map_path`, `dataset_path`, `weights_path`, `results_path`, and the environment overrides |
@@ -303,7 +318,7 @@ assets/                the wordmark
 | `intelx.sim.simulator_astar` | an older copy of the simulator. Only its `optimized_astar_path_planner` is used, by the policy and the baselines |
 | `intelx.planners` | `global_priority` for junction and branch bookkeeping, `rrt` and `rrt_star` for UPEN |
 | `intelx.baselines` | `simple` for the four geometry-only variants, `tier1` for the three prediction methods, `frontier` for the deployed reference |
-| `intelx.probes` | timing checks, not used by the benchmark. They read a map that does not ship |
+| `intelx.probes` | timing checks, not used by the benchmark |
 | `intelx.data.driver` | spawn sampling and the coverage shows for one map |
 | `intelx.data.ring_collector` | the persistent GPU workers that run a show and record what it observes. The controller initialises them once and passes `skip_worker_init=True`; `driver` lets each pool process initialise its own, which the initialiser makes a no-op once they exist |
 | `intelx.data.dataset` | `HybridChunkedDataset`, the chunked reader training and evaluation load through |
@@ -322,27 +337,11 @@ assets/                the wordmark
 
 ---
 
-## What this release does not carry
+## Citation
 
-**The trained checkpoint.** It is 293 MB, past what a git host will take, so
-it is a separate download. [`weights/README.md`](weights/README.md) has the
-link, the checksum and what the file contains. The architecture is
-`intelx.models.unet` and the training configuration is `intelx.cli.train`.
-
-**Most of the occupancy maps.** The full set is far past the same limit, so
-three ship as a sample, one from each kind, enough to run an episode and to
-see the format.
-
-| map | kind |
-|---|---|
-| `data/maps/test_standardized/small_office3.pgm` | a held-out KTH floor plan |
-| `data/maps/ood_test_standardized/aws_maps/hospital.pgm` | an out-of-distribution AWS RoboMaker world |
-| `data/maps/real/real_slam_corridor.pgm` | the real corridor, from a SLAM run |
-
-The rest go out with the weights. Every source dataset is public and
-separately available in the meantime, and `.gitignore` names the three above
-one by one, so adding a map is a deliberate act. See
-[`data/README.md`](data/README.md) for the layout and the sources.
+```bibtex
+<BIBTEX>
+```
 
 ---
 
