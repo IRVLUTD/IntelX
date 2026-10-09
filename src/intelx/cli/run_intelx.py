@@ -34,6 +34,7 @@ constructor and its run_exploration_episode(), so anything that imported it
 before still works.
 """
 
+import argparse
 import os
 
 import torch
@@ -48,6 +49,11 @@ from intelx.config import ExplorationConfig
 # --- Main Execution Block --------------------------------------------------
 def main(argv=None):
     """Run one episode. Returns a process exit status."""
+    argparse.ArgumentParser(
+        prog="python -m intelx.cli.run_intelx",
+        description="One IntelX episode. Every knob lives in ExplorationConfig "
+                    "in intelx/config.py; for other methods, maps or seeds use "
+                    "intelx.cli.run_method.").parse_args(argv)
     print("=" * 70)
     print("UPDATED GOAL-BASED AUTONOMOUS EXPLORATION SYSTEM")
     print("=" * 70)
