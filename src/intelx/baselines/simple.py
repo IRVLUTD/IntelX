@@ -30,7 +30,7 @@ frontier beyond the local window ending the run when it found no goal.
 
 USE (in the sweep, per mode):
     from intelx.baselines.simple import NearestFrontierMixin
-    from intelx.baselines.base import UpdatedGoalBasedAutonomousExplorer as Base
+    from intelx.baselines.frontier import UpdatedGoalBasedAutonomousExplorer as Base
     class E(NearestFrontierMixin, Base): pass
     explorer = E(simulator, model, config)     # model is unused by Tier-0 modes
 

@@ -374,9 +374,6 @@ class SWEEP:
     POLL_S = 0.25                          # how often to sample (coverage, path)
     SPAWN_CLEARANCE_M = 0.45               # spawn must be this clear of walls
 
-    # --- speed / reproducibility -----------------------------------------
-    APPLY_SIM4_SPEEDUPS = True             # patched image builders (exact, validated)
-    SPEEDUP_VALIDATE_CALLS = 2             # 0 once trusted
     # --- rich per-decision recording --------------------------------------
     # Heatmaps, network inputs, local components and the junction graph, for
     # runs you will actually visualise. EMPTY BY DEFAULT: a 400x400 float32
@@ -748,12 +745,12 @@ def build_simulator(map_path, config, sim_cfg=None):
 
 
 # Which module provides the frontier monolith that `frontier`, all Tier-0 mixins
-# and all Tier-1 mixins sit on. intelx.baselines.frontier is THE published baseline;
-# it is pinned first (and named in the meta json) so the paper can state exactly
-# what was run.
+# and all Tier-1 mixins sit on. intelx.baselines.frontier is THE published
+# baseline; it is named in the meta json so the paper can state exactly what was
+# run.
 _RESOLVED = {}
 
-FRONTIER_MODULE_ORDER = ("intelx.baselines.frontier", "intelx.baselines.base")
+FRONTIER_MODULE_ORDER = ("intelx.baselines.frontier",)
 
 
 def _base_monolith():
@@ -953,10 +950,7 @@ _WORKER_MODEL = {"m": None}
 
 def _worker_model(config):
     if _WORKER_MODEL["m"] is None:
-        try:
-            from intelx.common import create_model_for_inference
-        except Exception:
-            from intelx.baselines.base import create_model_for_inference
+        from intelx.common import create_model_for_inference
         _WORKER_MODEL["m"] = create_model_for_inference(
             config.MODEL_CHECKPOINT, config.device, model_type=config.MODEL_TYPE)
     return _WORKER_MODEL["m"]
@@ -974,16 +968,6 @@ def run_task(args):
     map_name = os.path.splitext(os.path.basename(map_path))[0]
     res = config.sim.get('RESOLUTION', 0.05)
     rows = []
-
-    if getattr(config, 'APPLY_SIM4_SPEEDUPS', True):
-        try:
-            try:
-                from intelx.sim import speedup as sim4_speedup
-            except Exception:
-                from intelx.sim import speedup as sim4_speedup
-            sim4_speedup.apply_speedups(validate_calls=0, patch_scan=False, verbose=False)
-        except Exception:
-            pass
 
     pairs = _mode_sensor_pairs(config, modes)
     model = _worker_model(config) if any(m in NEEDS_MODEL for m, _ in pairs) else None

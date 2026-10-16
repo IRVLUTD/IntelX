@@ -291,9 +291,9 @@ src/intelx/
                        run_intelx.py, run_method.py, run_sweep_all.py
   data/                driver.py, ring_collector.py, dataset.py,
                        collector.py
-  sim/                 simulator.py, simulator_astar.py, speedup.py
+  sim/                 simulator.py, simulator_astar.py
   planners/            global_priority.py, rrt.py, rrt_star.py
-  baselines/           simple.py, tier1.py, frontier.py, base.py
+  baselines/           simple.py, tier1.py, frontier.py
   models/              unet.py
   probes/              astar.py, tier1.py
 tests/                 layout, paths and hygiene checks
