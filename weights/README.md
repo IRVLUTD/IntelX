@@ -1,6 +1,6 @@
 # Checkpoints
 
-**Download:** [`checkpoint_best.pth`](<GOOGLE_DRIVE_LINK>), 293.4 MB. Put it in
+**Download:** [`checkpoint_best.pth`](https://utdallas.box.com/s/2tuurbusuawkowwe9rjnmsbkhtgm6b5o), 293.4 MB. Put it in
 this directory.
 
 ```text

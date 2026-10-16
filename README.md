@@ -65,7 +65,7 @@ Then put the trained checkpoint in `weights/`, see [Downloads](#downloads).
 
 | Item | Link | Goes In |
 |---|---|---|
-| Trained Checkpoint | [`checkpoint_best.pth`](<GOOGLE_DRIVE_LINK>), 293.4 MB | `weights/`, see [`weights/README.md`](weights/README.md) |
+| Trained Checkpoint | [`checkpoint_best.pth`](https://utdallas.box.com/s/2tuurbusuawkowwe9rjnmsbkhtgm6b5o), 293.4 MB | `weights/`, see [`weights/README.md`](weights/README.md) |
 | Occupancy Maps | [Maps](<MAPS_LINK>) | `data/maps/`, see [`data/README.md`](data/README.md) |
 | Coverage Dataset | [Dataset](<DATASET_LINK>) | `data/coverage/`, see [`data/README.md`](data/README.md) |
 
@@ -176,8 +176,8 @@ Ten entries are registered, nine methods and one ablation.
 | `local_only` | IntelX, Local Only: the ablation with the local planner alone |
 | `mapex` `upen` `hectoraug` | MapEx, UPEN, IG-Hector |
 
-The last three run behind a service, which must be up first. Every other
-method, `ours` included, runs without it.
+The last three need [MapEx](https://github.com/castacks/MapEx) installed and run behind a service, which
+must be up first. Every other method, `ours` included, runs without it.
 
 The geometry-only methods follow the rules of the papers they come from. L is
 the length of the A* path to the frontier, and the gain is the number of
@@ -215,9 +215,10 @@ python -m intelx.viz.showcase results/<run_name>          # or: intelx-showcase
 ```
 
 `services/mapex_service.py` calls MapEx's own planner rather than a
-reimplementation of it, so it runs inside MapEx's environment. Install MapEx and
-its `lama` conda environment by their instructions, copy the file into MapEx's
-own `scripts/` directory beside `explore.py`, and start it from there.
+reimplementation of it, so it runs inside MapEx's environment. Install
+[MapEx](https://github.com/castacks/MapEx) and its `lama` conda environment by their instructions, copy the
+file into MapEx's own [`scripts/`](https://github.com/castacks/MapEx/tree/main/scripts) directory beside `explore.py`, and start
+it from there.
 
 ```bash
 conda activate lama

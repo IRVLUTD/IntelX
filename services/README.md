@@ -17,9 +17,10 @@ only thing this file contains is format and coordinate conversion.
 
 ## Installation
 
-1. Install MapEx and its `lama` conda environment by their instructions.
-2. Copy `services/mapex_service.py` into MapEx's own `scripts/` directory,
-   beside `explore.py`.
+1. Install [MapEx](https://github.com/castacks/MapEx) and its `lama` conda environment by their
+   instructions.
+2. Copy `services/mapex_service.py` into MapEx's own
+   [`scripts/`](https://github.com/castacks/MapEx/tree/main/scripts) directory, beside `explore.py`.
 3. Run it from there.
 
 ```bash
