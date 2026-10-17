@@ -514,7 +514,7 @@ class _FrontierSweepBase:
                         # five such passes in a row emit BASELINE_GLOBAL and the
                         # run is declared exhausted while frontiers are still on
                         # the map: nearest/random/frontier/geom_ig all quit at
-                        # 15-45% coverage on 50010536_PLAN4 while cost_utility
+                        # 15-45% coverage on medium_office6 while cost_utility
                         # finished the same map from the same spawn.
                         #
                         # A frontier we could not COST is not a frontier that does

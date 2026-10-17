@@ -21,9 +21,9 @@ def test_defaults_sit_under_the_repository():
 
 
 def test_map_path_is_relative_to_the_maps_root():
-    p = paths.map_path("test_standardized/small_office3.pgm")
+    p = paths.map_path("test/small_office3.pgm")
     assert p == os.path.join(str(paths.MAPS_ROOT),
-                             "test_standardized", "small_office3.pgm")
+                             "test", "small_office3.pgm")
     assert isinstance(p, str)
 
 

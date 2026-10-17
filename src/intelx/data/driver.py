@@ -99,7 +99,7 @@ if __name__ == '__main__':
     BASE_OUTPUT_DIR = dataset_path("dense_data/small_house_aws")
 
     config = {
-        'MAP_PGM': map_path('train_standardized/small_house_aws.pgm'),
+        'MAP_PGM': map_path('train/small_house_aws.pgm'),
         'RESOLUTION': RESOLUTION, 'ROBOT_R': 0.35, 'FOV': 220 * pi / 180, 'N_BEAMS': 662,
         'MAX_R': int(LASER_SCAN_R / RESOLUTION), 'WIN_M': WIN_M,
         'ANG_VEL': pi, 'DT': 0.1,

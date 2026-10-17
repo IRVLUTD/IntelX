@@ -37,7 +37,7 @@ from intelx.paths import map_path
 
 
 # --- edit these ------------------------------------------------------------
-MAP_PGM = (map_path("test_standardized/50010536_PLAN4.pgm"))
+MAP_PGM = (map_path("test/medium_office6.pgm"))
 SPAWN_XY = (3726.0, 1838.0)          # seed 1000 spawn from spawns.json
 HOST = "127.0.0.1"
 PORT = 5555

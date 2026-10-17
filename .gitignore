@@ -57,9 +57,9 @@ data/coverage/**
 data/maps/**
 !data/maps/**/
 !data/maps/**/.gitkeep
-!data/maps/real/real_slam_corridor.pgm
-!data/maps/test_standardized/small_office3.pgm
-!data/maps/ood_test_standardized/aws_maps/hospital.pgm
+!data/maps/real/ecss_corridor.pgm
+!data/maps/test/small_office3.pgm
+!data/maps/ood/aws_maps/hospital.pgm
 
 # Checkpoints, see weights/README.md.
 weights/*

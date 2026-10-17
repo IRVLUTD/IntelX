@@ -50,8 +50,8 @@ def _under(root: Path, rel: str | os.PathLike) -> str:
 def map_path(rel: str | os.PathLike) -> str:
     """An occupancy map, by its path under the maps root.
 
-    >>> map_path("test_standardized/small_office3.pgm")  # doctest: +SKIP
-    '/.../data/maps/test_standardized/small_office3.pgm'
+    >>> map_path("test/small_office3.pgm")  # doctest: +SKIP
+    '/.../data/maps/test/small_office3.pgm'
     """
     return _under(MAPS_ROOT, rel)
 

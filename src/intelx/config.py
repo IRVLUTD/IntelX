@@ -94,11 +94,11 @@ class ExplorationConfig:
     SUBMITTED_BEHAVIOUR = False
 
     # The three maps this release ships:
-    #   test_standardized/small_office3.pgm
-    #   ood_test_standardized/aws_maps/hospital.pgm
-    #   real/real_slam_corridor.pgm
+    #   test/small_office3.pgm
+    #   ood/aws_maps/hospital.pgm
+    #   real/ecss_corridor.pgm
     sim = {
-        'MAP_PGM': map_path("test_standardized/small_office3.pgm"),
+        'MAP_PGM': map_path("test/small_office3.pgm"),
         'RESOLUTION': RESOLUTION, 'ROBOT_R': ROBOT_RADIUS_METERS, 'WIN_M': WIN_M,
         'SPAWN_CLEARANCE': 0.45, 'FOV': 220 * pi / 180, 'N_BEAMS': 662, 'MAX_R': int(LASER_SCAN_R / RESOLUTION),
         'STEP_SIZE_M': 0.1, 'ANG_VEL': pi, 'DT': 0.1, 'WIN_PX': int(WIN_M / RESOLUTION),

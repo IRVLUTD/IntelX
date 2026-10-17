@@ -4,7 +4,7 @@ intelx.cli.run_method
 One run of any method on any map, drawn live the way the paper's videos are.
 
     python -m intelx.cli.run_method --method ours
-    python -m intelx.cli.run_method --method nearest --map ood_test_standardized/aws_maps/hospital.pgm
+    python -m intelx.cli.run_method --method nearest --map ood/aws_maps/hospital.pgm
     python -m intelx.cli.run_method --method ours --set BRANCH_ORDER=strongest
     python -m intelx.cli.run_method --list
 
@@ -63,7 +63,7 @@ def main(argv=None):
         epilog="Ablations of IntelX: --set BRANCH_ORDER=strongest, "
                "--set LOCAL_FIELD=geom_ig, or --method local_only.")
     ap.add_argument("--method", choices=sorted(sweep.MODE_REGISTRY))
-    ap.add_argument("--map", default="test_standardized/small_office3.pgm",
+    ap.add_argument("--map", default="test/small_office3.pgm",
                     help="under the maps root, or an absolute path")
     ap.add_argument("--seed", type=int, default=sweep.SWEEP.SEED_BASE,
                     help="picks the spawn, as in the benchmark")

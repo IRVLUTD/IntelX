@@ -1814,7 +1814,7 @@ if __name__ == '__main__':
         GAIN_SCALE = 1.0  # Weight for frontier size (reward)
 
         sim = {  # data_remapped/train/50010535_PLAN1.pgm
-            'MAP_PGM': map_path('train_standardized/small_house_aws.pgm'),
+            'MAP_PGM': map_path('train/small_house_aws.pgm'),
             'RESOLUTION': RESOLUTION, 'ROBOT_R': ROBOT_RADIUS_METERS, 'WIN_M': WIN_M,
             'SPAWN_CLEARANCE': 0.45, 'FOV': 220 * pi / 180, 'N_BEAMS': 662, 'MAX_R': int(LASER_SCAN_R / RESOLUTION),
             'STEP_SIZE_M': 0.1, 'ANG_VEL': pi, 'DT': 0.1, 'WIN_PX': int(WIN_M / RESOLUTION),

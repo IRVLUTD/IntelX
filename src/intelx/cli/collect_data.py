@@ -22,7 +22,7 @@ MAX_CONCURRENT_DRIVERS = 18
 SHOWS_PER_MAP_CONCURRENT = 8
 
 # Directories
-MAP_INPUT_DIR = map_path("train_standardized")
+MAP_INPUT_DIR = map_path("train")
 DATA_OUTPUT_DIR = dataset_path("coverage_data_main_3")
 
 

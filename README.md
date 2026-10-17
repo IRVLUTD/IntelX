@@ -66,16 +66,18 @@ Then put the trained checkpoint in `weights/`, see [Downloads](#downloads).
 | Item | Link | Goes In |
 |---|---|---|
 | Trained Checkpoint | [`checkpoint_best.pth`](https://utdallas.box.com/s/2tuurbusuawkowwe9rjnmsbkhtgm6b5o), 293.4 MB | `weights/`, see [`weights/README.md`](weights/README.md) |
-| Occupancy Maps | [Maps](<MAPS_LINK>) | `data/maps/`, see [`data/README.md`](data/README.md) |
-| Coverage Dataset | [Dataset](<DATASET_LINK>) | `data/coverage/`, see [`data/README.md`](data/README.md) |
+| Occupancy Maps | [`maps/`](https://utdallas.box.com/s/stgu95mdcf3p7tgp5z5a53pcxiuwrplu): the test, out-of-distribution and real maps | the contents of `maps/` go in `data/maps/`, see [`data/README.md`](data/README.md) |
+
+The 18 training maps and the coverage dataset (about 1 TB) are not public yet;
+`collect_data` regenerates the dataset from the training maps.
 
 Three maps are included, one of each kind.
 
 | Map | Kind |
 |---|---|
-| `data/maps/test_standardized/small_office3.pgm` | a held-out KTH floor plan |
-| `data/maps/ood_test_standardized/aws_maps/hospital.pgm` | an out-of-distribution AWS RoboMaker world |
-| `data/maps/real/real_slam_corridor.pgm` | the real corridor, from a SLAM run |
+| `data/maps/test/small_office3.pgm` | a held-out KTH floor plan |
+| `data/maps/ood/aws_maps/hospital.pgm` | an out-of-distribution AWS RoboMaker world |
+| `data/maps/real/ecss_corridor.pgm` | the real corridor, from a SLAM run |
 
 ---
 
@@ -84,8 +86,8 @@ Three maps are included, one of each kind.
 ### Training the Regressor
 
 Four steps, in order. The first is a long multi-GPU job, so read the
-constants at the top of `collect_data.py` before starting it. With the coverage
-dataset from [Downloads](#downloads), start at `train`.
+constants at the top of `collect_data.py` before starting it. With a collected
+coverage dataset, start at `train`.
 
 ```bash
 python -m intelx.cli.collect_data    # coverage data, over your maps
@@ -96,7 +98,7 @@ python -m intelx.cli.evaluate        # what it predicts, side by side
 
 `collect_data` runs the 18 training maps listed in `data/train_metadata.csv`,
 each with the number of shows Table 1 of the paper gives it, in proportion to
-its complexity score. It reads the maps from `train_standardized/` under the
+its complexity score. It reads the maps from `train/` under the
 maps root, samples spawns, runs the exploration shows that record how much new
 area each goal would gain, and writes the result under `INTELX_DATASET_ROOT`.
 `intelx.data.driver` does one map at a time and is what the controller drives.
@@ -127,7 +129,7 @@ that matter.
 |---|---|---|
 | `MODEL_CHECKPOINT` | `weights_path("checkpoint_best.pth")` | the trained U-Net |
 | `MODEL_TYPE` | `resnet34` | must match the checkpoint |
-| `sim['MAP_PGM']` | `map_path("test_standardized/small_office3.pgm")` | the occupancy map to explore |
+| `sim['MAP_PGM']` | `map_path("test/small_office3.pgm")` | the occupancy map to explore |
 | `HEADLESS` | `False` | `True` runs with no window, much faster |
 | `VIEW_STYLE` / `VIEW_FPS` | `'paper'` / `10` | the live view and how often it is drawn; `'debug'` gives the older three-panel dashboard |
 | `TURBO_MODE` | `False` | `True` drops the artificial sleeps. `FIXED_DT` keeps the map identical, and the benchmark pins it on |
@@ -140,7 +142,7 @@ that matter.
 
 ```bash
 python -m intelx.cli.run_method --list                     # or: intelx-method
-python -m intelx.cli.run_method --method nearest --map ood_test_standardized/aws_maps/hospital.pgm
+python -m intelx.cli.run_method --method nearest --map ood/aws_maps/hospital.pgm
 python -m intelx.cli.run_method --method ours --set BRANCH_ORDER=strongest
 ```
 

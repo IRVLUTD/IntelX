@@ -136,57 +136,51 @@ class SWEEP:
 
     # --- maps -------------------------------------------------------------
     MAPS = [
-        # map_path("test_standardized/medium_office6.pgm"),
-        # DUPLICATES OF TRAINING MAPS -- byte-identical, do not re-enable:
-        #   0510034869_A-40 == medium_office3, 0510032217_A-40 == large_office1
-        # map_path("test_standardized/small_office3.pgm"),
-        # map_path("test_standardized/large_office7.pgm"),
-        # map_path("ood_test_standardized/house_expo/large/houseexpo_large_3.pgm"),
-        # map_path("ood_test_standardized/house_expo/large/new/houseexpo_large_3.pgm"),
-        # map_path("ood_test_standardized/msd/large/msd_large_1.pgm"),
-        # map_path("ood_test_standardized/aws_maps/hospital.pgm"),
-        # map_path("train_standardized/atrium1.pgm"),
-        # map_path("train_standardized/corridor1.pgm"),
-        # map_path("train_standardized/small_lounge1.pgm"),
-        # map_path("train_standardized/small_lounge2.pgm"),
-        # map_path("train_standardized/small_office1.pgm"),
-        # map_path("train_standardized/small_office2.pgm"),
-        # map_path("train_standardized/small_house_aws.pgm"),
-        # map_path("train_standardized/medium_office1.pgm"),
-        # map_path("train_standardized/medium_office2.pgm"),
-        # map_path("train_standardized/medium_office3.pgm"),
-        # map_path("train_standardized/medium_office4.pgm"),
-        # map_path("train_standardized/medium_office5.pgm"),
-        # map_path("train_standardized/large_office1.pgm"),
-        # map_path("train_standardized/large_office2.pgm"),
-        # map_path("train_standardized/large_office3.pgm"),
-        # map_path("train_standardized/large_office4.pgm"),
-        # map_path("train_standardized/large_office5.pgm"),
-        # map_path("train_standardized/large_office6.pgm"),
-        # map_path("msd_final/small/msd_small_1.pgm"),
-        # map_path("msd_final/small/msd_small_2.pgm"),
-        # map_path("msd_final/small/msd_small_3.pgm"),
-        # map_path("msd_final/medium/msd_medium_1.pgm"),
-        # map_path("msd_final/medium/msd_medium_2.pgm"),
-        # map_path("msd_final/medium/msd_medium_3.pgm"),
-        # map_path("msd_final/large/msd_large_2.pgm"),
-        # map_path("msd_final/large/msd_large_3.pgm"),
-        # map_path("ood_test_standardized/house_expo/small/houseexpo_small_1.pgm"),
-        # map_path("ood_test_standardized/house_expo/small/houseexpo_small_2.pgm"),
-        # map_path("ood_test_standardized/house_expo/small/houseexpo_small_3.pgm"),
-        # map_path("ood_test_standardized/house_expo/medium/houseexpo_medium_1.pgm"),
-        # map_path("ood_test_standardized/house_expo/medium/houseexpo_medium_2.pgm"),
-        # map_path("ood_test_standardized/house_expo/medium/houseexpo_medium_3.pgm"),
-        # map_path("ood_test_standardized/house_expo/large/houseexpo_large_1.pgm"),
-        # map_path("ood_test_standardized/house_expo/large/houseexpo_large_2.pgm"),
-        map_path("real/real_slam_corridor.pgm"),
-        # map_path("ood_test_standardized/house_expo/large/houseexpo_large_1.pgm"),
-        # map_path("ood_test_standardized/house_expo/medium/houseexpo_medium_1.pgm"),
-        # map_path("ood_test_standardized/house_expo/small/houseexpo_small_2.pgm"),
-        # map_path("ood_test_standardized/msd/medium/msd_medium_2.pgm"),
-        # map_path("ood_test_standardized/msd/medium/msd_medium_3.pgm"),
-        # map_path("ood_test_standardized/msd/large/msd_large_2.pgm")
-
+        # held-out KTH floor plans
+        # map_path("test/small_office3.pgm"),
+        # map_path("test/medium_office6.pgm"),
+        # map_path("test/large_office7.pgm"),
+        # out of distribution: HouseExpo, Modified Swiss Dwellings, AWS RoboMaker
+        # map_path("ood/house_expo/small/houseexpo_small_1.pgm"),
+        # map_path("ood/house_expo/small/houseexpo_small_2.pgm"),
+        # map_path("ood/house_expo/small/houseexpo_small_3.pgm"),
+        # map_path("ood/house_expo/medium/houseexpo_medium_1.pgm"),
+        # map_path("ood/house_expo/medium/houseexpo_medium_2.pgm"),
+        # map_path("ood/house_expo/medium/houseexpo_medium_3.pgm"),
+        # map_path("ood/house_expo/large/houseexpo_large_1.pgm"),
+        # map_path("ood/house_expo/large/houseexpo_large_2.pgm"),
+        # map_path("ood/house_expo/large/houseexpo_large_3.pgm"),
+        # map_path("ood/msd/small/msd_small_1.pgm"),
+        # map_path("ood/msd/small/msd_small_2.pgm"),
+        # map_path("ood/msd/small/msd_small_3.pgm"),
+        # map_path("ood/msd/medium/msd_medium_1.pgm"),
+        # map_path("ood/msd/medium/msd_medium_2.pgm"),
+        # map_path("ood/msd/medium/msd_medium_3.pgm"),
+        # map_path("ood/msd/large/msd_large_1.pgm"),
+        # map_path("ood/msd/large/msd_large_2.pgm"),
+        # map_path("ood/msd/large/msd_large_3.pgm"),
+        # map_path("ood/aws_maps/hospital.pgm"),
+        # the real SLAM map
+        map_path("real/ecss_corridor.pgm"),
+        # training floor plans, data/train_metadata.csv
+        # map_path("train/small_house_aws.pgm"),
+        # map_path("train/small_lounge1.pgm"),
+        # map_path("train/small_lounge2.pgm"),
+        # map_path("train/small_office1.pgm"),
+        # map_path("train/corridor1.pgm"),
+        # map_path("train/small_office2.pgm"),
+        # map_path("train/medium_office3.pgm"),
+        # map_path("train/atrium1.pgm"),
+        # map_path("train/medium_office5.pgm"),
+        # map_path("train/medium_office2.pgm"),
+        # map_path("train/medium_office1.pgm"),
+        # map_path("train/large_office6.pgm"),
+        # map_path("train/large_office3.pgm"),
+        # map_path("train/large_office5.pgm"),
+        # map_path("train/large_office2.pgm"),
+        # map_path("train/medium_office4.pgm"),
+        # map_path("train/large_office1.pgm"),
+        # map_path("train/large_office4.pgm"),
     ]
 
     # --- how many spawns (runs) per map -----------------------------------
@@ -355,7 +349,7 @@ class SWEEP:
     # Wall-clock cap per run. A SAFETY NET, not the experimental budget. If a
     # healthy run trips it, its path metrics are censored at MAX_PATH_M even
     # though the robot never spent that path, which understates the method.
-    # MEASURED on 50010536_PLAN4 (4399x4399): a Tier-1 decision costs ~10 s of
+    # MEASURED on medium_office6 (4399x4399): a Tier-1 decision costs ~10 s of
     # service (visvarprob/hectoraug; ~3.6 s upen) plus 2-20 s of A*, and the
     # robot drives at 0.75 m/s. A full 99% Tier-1 run is hours.
     MAX_WALL_S = 40000.0

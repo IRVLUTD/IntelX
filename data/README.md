@@ -5,10 +5,13 @@ inputs. `data/coverage` holds the generated training set, which the collectors
 write and training reads. They are separate roots because a coverage chunk is
 not a floor plan and the two are usually on different disks.
 
-The full set of maps is at [Maps](<MAPS_LINK>) and the coverage dataset at
-[Dataset](<DATASET_LINK>). Three of the maps are included, one of each kind,
-listed in the README. Point either root elsewhere with an environment variable
-and change nothing in the source.
+The test, out-of-distribution and real maps are at
+[Maps](https://utdallas.box.com/s/stgu95mdcf3p7tgp5z5a53pcxiuwrplu), in its
+`maps/` folder. The 18 training maps and the coverage dataset (about 1 TB) are
+not public yet; `collect_data` regenerates the dataset from the training maps.
+Three of the maps are included, one of each kind, listed in the README. Point
+either root elsewhere with an environment variable and change nothing in the
+source.
 
 ```bash
 export INTELX_MAPS_ROOT=/path/to/your/maps
@@ -23,14 +26,13 @@ watertight. `intelx.paths.map_path` resolves every one of them under
 
 ```
 data/maps/
-  train_standardized/          the 18 training maps, 17 KTH floor plans and
+  train/                       the 18 training maps, 17 KTH floor plans and
                                the AWS small house
-  test_standardized/           the three held-out KTH maps
-  ood_test_standardized/
+  test/                        the three held-out KTH maps
+  ood/
     house_expo/{small,medium,large}/
     msd/{small,medium,large}/  Modified Swiss Dwellings
     aws_maps/                  AWS RoboMaker worlds
-  msd_final/{small,medium,large}/
   real/                        the real corridor scan
 ```
 
@@ -38,8 +40,8 @@ data/maps/
 
 The maps are standardised from four public datasets, each under its own
 licence: KTH floor plans, HouseExpo, Modified Swiss Dwellings and the AWS
-RoboMaker worlds. The standardised set from [Maps](<MAPS_LINK>) unpacks into the
-tree above.
+RoboMaker worlds. The `maps/` folder of the download unpacks into the tree
+above.
 
 `data/train_metadata.csv` lists the 18 training maps with the shows each
 receives, Table 1 of the paper, allocated in proportion to the complexity
@@ -57,7 +59,7 @@ data/coverage/
   dense_data/<map>/        what a single-map run of intelx.data.driver writes
 ```
 
-Download it from [Dataset](<DATASET_LINK>), or generate it.
+It is not public yet, so generate it.
 `python -m intelx.cli.collect_data` runs the collection across every map in
 `INTELX_MAPS_ROOT`, and it is a long multi-GPU job, so read the constants at the
 top of that file first. `<CHUNKING_SCRIPT>` then packs what it writes into
