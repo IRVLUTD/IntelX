@@ -24,7 +24,7 @@
   <a href="https://labs.utdallas.edu/irvl/">Intelligent Robotics and Vision Lab</a>, Department of Computer Science, The University of Texas at Dallas
 </p>
 
-<h3 align="center"><a href="<ARXIV_LINK>">arXiv</a> | <a href="<PROJECT_PAGE_LINK>">Project Page</a> | <a href="<VIDEO_LINK>">Video</a></h3>
+<h3 align="center"><a href="<ARXIV_LINK>">arXiv</a> | <a href="https://irvlutd.github.io/IntelX/">Project Page</a> | <a href="<VIDEO_LINK>">Video</a></h3>
 
 One U-Net regresses, over a robot-frame occupancy image, how much new area the
 sensor would gain from each nearby goal. The planner reads angular components
