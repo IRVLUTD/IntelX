@@ -16,7 +16,9 @@ SKIP_ANYWHERE = {".git", ".venv", "venv", "__pycache__", ".pytest_cache",
                  "build", "dist"}
 # Only at the top level. `src/intelx/data` is a package and must be scanned,
 # so these are matched by path rather than by name.
-SKIP_AT_ROOT = {"data", "weights", "results"}
+# third_party holds other projects' repositories as git submodules (MapEx);
+# their code is theirs, so it is not held to this repository's rules.
+SKIP_AT_ROOT = {"data", "weights", "results", "third_party"}
 
 
 def prune(root, dirs):

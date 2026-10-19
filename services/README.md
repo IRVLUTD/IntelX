@@ -17,26 +17,28 @@ only thing this file contains is format and coordinate conversion.
 
 ## Installation
 
-1. Install [MapEx](https://github.com/castacks/MapEx) and its `lama` conda environment by their
-   instructions.
-2. Copy `services/mapex_service.py` into MapEx's own
-   [`scripts/`](https://github.com/castacks/MapEx/tree/main/scripts) directory, beside `explore.py`.
-3. Run it from there.
+[MapEx](https://github.com/castacks/MapEx) is linked at `third_party/MapEx` as a git submodule, pinned to
+commit `53636bd`.
+
+1. Fetch it: `git submodule update --init third_party/MapEx`.
+2. Install its `lama` conda environment by their instructions.
+3. Start the service from the repository root.
 
 ```bash
 conda activate lama
-cd /path/to/MapEx/scripts
-python mapex_service.py --port 5555
+python services/mapex_service.py --mapex-root third_party/MapEx --port 5555
 ```
 
-The MapEx root is taken to be the file's parent directory, which is correct
-once step 2 is done. Set `MAPEX_ROOT`, or pass `--mapex-root`, to run it from
-somewhere else. `--device` selects the GPU.
+`--mapex-root`, or `MAPEX_ROOT`, can point at any MapEx checkout. Without
+either, the MapEx root is taken to be the parent of the directory this file is
+in, which is right when the file is copied into MapEx's own
+[`scripts/`](https://github.com/castacks/MapEx/tree/main/scripts) directory,
+beside `explore.py`. `--device` selects the GPU.
 
 Check it is alive, from any environment.
 
 ```bash
-python mapex_service.py --selftest-client --port 5555
+python services/mapex_service.py --selftest-client --port 5555
 ```
 
 The sweep expects it on `127.0.0.1:5555`, or on each port in

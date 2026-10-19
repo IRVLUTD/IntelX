@@ -36,24 +36,25 @@ CONTRACT (client works in THEIR resolution, 0.1 m/px, UNPADDED)
 INSTALLING IT
     This file is not standalone. It calls MapEx's own planner, so it has to run
     inside MapEx's environment, with MapEx's modules importable and its
-    working directory set to their scripts/. The way to get all three is to
-    put this file where their code already lives.
+    working directory set to their scripts/. Given the MapEx root, it sets
+    up the last two itself.
 
-    1. Install MapEx and its `lama` conda environment by their instructions.
-    2. Copy this file into MapEx's own scripts/ directory, beside explore.py.
-    3. Run it from there.
+    MapEx is linked at third_party/MapEx as a git submodule.
+
+    1. Fetch it: git submodule update --init third_party/MapEx
+    2. Install its `lama` conda environment by their instructions.
+    3. Run this file from the repository root, pointed at it:
 
            conda activate lama
-           cd /path/to/MapEx/scripts
-           python mapex_service.py --port 5555
+           python services/mapex_service.py --mapex-root third_party/MapEx --port 5555
 
-       The MapEx root is taken to be this file's parent directory, which is
-       correct once step 2 is done. Set MAPEX_ROOT, or pass --mapex-root, to
-       run it from anywhere else.
+       Without --mapex-root or MAPEX_ROOT, the MapEx root is taken to be the
+       parent of this file's directory, which is right when the file is copied
+       into MapEx's own scripts/ directory, beside explore.py.
 
     Check it is alive, from any environment:
 
-           python mapex_service.py --selftest-client --port 5555
+           python services/mapex_service.py --selftest-client --port 5555
 """
 from __future__ import print_function
 
@@ -728,8 +729,9 @@ def _selftest_client(port):
 
 if __name__ == '__main__':
     port = 5555
-    # This file is meant to sit in MapEx's own scripts/ directory, so MapEx's
-    # root is its parent. MAPEX_ROOT overrides that, and so does --mapex-root.
+    # Copied into MapEx's own scripts/ directory, MapEx's root is this file's
+    # parent. MAPEX_ROOT overrides that, and so does --mapex-root, e.g. the
+    # submodule at third_party/MapEx.
     root = os.path.expanduser(os.environ.get(
         'MAPEX_ROOT',
         os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
@@ -742,6 +744,9 @@ if __name__ == '__main__':
             root = os.path.expanduser(args[i + 1])
         elif a == '--device':
             device = args[i + 1]
+    # Absolute, because the backend changes into scripts/ before it imports:
+    # a relative root such as third_party/MapEx would stop resolving there.
+    root = os.path.abspath(root)
     if '--selftest-client' in args:
         _selftest_client(port)
     else:

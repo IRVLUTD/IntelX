@@ -217,18 +217,18 @@ python -m intelx.viz.showcase results/<run_name>          # or: intelx-showcase
 ```
 
 `services/mapex_service.py` calls MapEx's own planner rather than a
-reimplementation of it, so it runs inside MapEx's environment. Install
-[MapEx](https://github.com/castacks/MapEx) and its `lama` conda environment by their instructions, copy the
-file into MapEx's own [`scripts/`](https://github.com/castacks/MapEx/tree/main/scripts) directory beside `explore.py`, and start
-it from there.
+reimplementation of it, so it runs inside MapEx's environment.
+[MapEx](https://github.com/castacks/MapEx) is linked at `third_party/MapEx` as a git submodule, pinned to
+commit `53636bd`. Fetch it, install its `lama` conda environment by their
+instructions, and start the service from the repository root.
 
 ```bash
+git submodule update --init third_party/MapEx
 conda activate lama
-cd /path/to/MapEx/scripts
-python mapex_service.py --port 5555
+python services/mapex_service.py --mapex-root third_party/MapEx --port 5555
 ```
 
-[`services/README.md`](services/README.md) has the placement steps and the
+[`services/README.md`](services/README.md) has the other ways to run it and the
 wire protocol.
 
 Two sensing regimes are defined and the mapping between them is deliberate.
@@ -306,7 +306,8 @@ data/train_metadata.csv  the training maps and their shows, Table 1
 data/coverage/         the generated training set, see data/README.md
 weights/               checkpoints, see weights/README.md
 results/               run output, ignored by git
-services/              mapex_service.py, to be copied into MapEx
+services/              mapex_service.py, the bridge to MapEx
+third_party/MapEx/     MapEx, a git submodule, for the three prediction baselines
 assets/                the wordmark
 ```
 
