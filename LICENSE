@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Saurav Dosi, Itay Kadosh, Yu Xiang
+Copyright (c) 2026 Intelligent Robotics and Vision Lab at the University of Texas at Dallas
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,9 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-src/intelx/planners/rrt.py and src/intelx/planners/rrt_star.py are adapted
-from PythonRobotics by Atsushi Sakai, MIT licensed. The original notice is
-kept in each file.
