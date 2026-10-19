@@ -40,6 +40,16 @@ junction, and commits to branches weakest first.
 This repository holds the simulator, the coverage-gain regressor, the policy,
 and every baseline the paper compares against.
 
+<p align="center">
+  <img src="assets/intelx-in-action.gif" width="85%" alt="IntelX exploring KTH Small Office 1 from 5% to 99% coverage: the predicted coverage-gain field in the rotating local window, the angular components and junction nodes the planners read from it, frontier fallbacks, and the path travelled.">
+  <br>
+  <sub>IntelX exploring KTH Small Office 1, from the supplementary video.</sub>
+</p>
+
+**Try it in your browser.** The [live demo](https://irvlutd.github.io/IntelX/#demo)
+on the project page runs IntelX on an example map or on a floor plan you draw or
+upload, with nothing to install.
+
 ---
 
 ## Install
