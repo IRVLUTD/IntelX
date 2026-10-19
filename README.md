@@ -150,8 +150,7 @@ paired protocol, `SUBMITTED_BEHAVIOUR` and the two sensing regimes.</sub>
 Code under the <a href="LICENSE">MIT License</a>. <code>rrt.py</code> and <code>rrt_star.py</code> are adapted from
 <a href="https://github.com/AtsushiSakai/PythonRobotics">PythonRobotics</a>, MIT licensed, with its notice in each file.
 Questions: <a href="https://github.com/IRVLUTD/IntelX/issues">open an issue</a> or contact
-<a href="https://sauravdosi.com/">Saurav</a> or
-<a href="https://www.linkedin.com/in/itay-kadosh/">Itay</a>.
+<a href="https://sauravdosi.com/">Saurav Dosi</a>.
 <br>
 Built at the <a href="https://labs.utdallas.edu/irvl/">Intelligent Robotics and Vision Lab</a>,
 The University of Texas at Dallas.
