@@ -26,6 +26,12 @@
 
 <h3 align="center"><a href="<ARXIV_LINK>">arXiv</a> | <a href="https://irvlutd.github.io/IntelX/">Project Page</a> | <a href="<VIDEO_LINK>">Video</a></h3>
 
+<p align="center">
+  <img src="assets/intelx-overview.webp" width="95%" alt="IntelX overview: a robot in an unseen 2D environment builds its map from a 220-degree laser scan; a robot-centred 20 m window of that map goes through a U-Net that returns a coverage-gain heatmap; the heatmap's angular components are candidate directions, and multi-peaked structure marks a junction with branches; the local and global planner commits to those branches, falls back to frontier centroids when it is stuck, and explores the whole floor along a short path.">
+  <br>
+  <sub>From the robot's scan and local window to the predicted coverage gain, its candidate directions and junctions, and the explored floor.</sub>
+</p>
+
 One U-Net regresses, over a robot-frame occupancy image, how much new area the
 sensor would gain from each nearby goal. The planner reads angular components
 of that field as candidate directions, reads multi-peaked structure as a
