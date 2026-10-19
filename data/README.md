@@ -9,9 +9,16 @@ The test, out-of-distribution and real maps are at
 [Maps](https://utdallas.box.com/s/stgu95mdcf3p7tgp5z5a53pcxiuwrplu), in its
 `maps/` folder. The 18 training maps and the coverage dataset (about 1 TB) are
 not public yet; `collect_data` regenerates the dataset from the training maps.
-Three of the maps are included, one of each kind, listed in the README. Point
-either root elsewhere with an environment variable and change nothing in the
-source.
+Three of the maps are included, one of each kind.
+
+| Map | Kind |
+|---|---|
+| `data/maps/test/small_office3.pgm` | a held-out KTH floor plan |
+| `data/maps/ood/aws_maps/hospital.pgm` | an out-of-distribution AWS RoboMaker world |
+| `data/maps/real/ecss_corridor.pgm` | the real corridor, from a SLAM run |
+
+Point either root elsewhere with an environment variable and change nothing in
+the source.
 
 ```bash
 export INTELX_MAPS_ROOT=/path/to/your/maps
