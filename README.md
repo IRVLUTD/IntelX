@@ -85,10 +85,10 @@ against.
 
 <table>
 <tr>
-<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/p99-dark.svg"><img src="assets/numbers/p99.svg" height="48" alt=">20%"></picture><br>Shorter Path to 99% Coverage Than Every Baseline That Finishes the Larger Maps</td>
-<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/speed-dark.svg"><img src="assets/numbers/speed.svg" height="48" alt="8.1 ms"></picture><br>Per 20 m Coverage-Gain Field, About 120 FPS</td>
-<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/samples-dark.svg"><img src="assets/numbers/samples.svg" height="48" alt="10⁶"></picture><br>Training Samples, Each Labelled by a Simulation Oracle</td>
-<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/baselines-dark.svg"><img src="assets/numbers/baselines.svg" height="48" alt="8"></picture><br>Baselines in One Simulator, Run From the Same Spawns</td>
+<td align="center" valign="top" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/p99-dark.svg"><img src="assets/numbers/p99.svg" height="48" alt=">20%"></picture><br>Shorter Path to 99% Coverage Than Every Baseline That Finishes the Larger Maps</td>
+<td align="center" valign="top" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/speed-dark.svg"><img src="assets/numbers/speed.svg" height="48" alt="8.1 ms"></picture><br>Per 20 m Coverage-Gain Field, About 120 FPS</td>
+<td align="center" valign="top" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/samples-dark.svg"><img src="assets/numbers/samples.svg" height="48" alt="10⁶"></picture><br>Training Samples, Each Labelled by a Simulation Oracle</td>
+<td align="center" valign="top" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/baselines-dark.svg"><img src="assets/numbers/baselines.svg" height="48" alt="8"></picture><br>Baselines in One Simulator, Run From the Same Spawns</td>
 </tr>
 </table>
 
