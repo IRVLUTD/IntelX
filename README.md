@@ -37,6 +37,7 @@
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white"></a>
 
 <br>
+<br>
 
 <img src="assets/intelx-overview.webp" width="95%" alt="IntelX overview: a robot in an unseen 2D environment builds its map from a 220-degree laser scan; a robot-centred 20 m window of that map goes through a U-Net that returns a coverage-gain heatmap; the heatmap's angular components are candidate directions, and multi-peaked structure marks a junction with branches; the local and global planner commits to those branches, falls back to frontier centroids when it is stuck, and explores the whole floor along a short path.">
 
@@ -79,9 +80,14 @@ against.
 </tr>
 </table>
 
-| **>20%** | **8.1 ms** | **10<sup>6</sup>** | **8** |
-|:-:|:-:|:-:|:-:|
-| shorter path to 99% coverage<br>than every baseline that<br>finishes the larger maps | per 20 m coverage-gain field,<br>about 120 FPS | training samples, each<br>labelled by a simulation oracle | baselines in one simulator,<br>run from the same spawns |
+<table>
+<tr>
+<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/p99-dark.svg"><img src="assets/numbers/p99.svg" height="48" alt=">20%"></picture><br>Shorter Path to 99% Coverage Than Every Baseline That Finishes the Larger Maps</td>
+<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/speed-dark.svg"><img src="assets/numbers/speed.svg" height="48" alt="8.1 ms"></picture><br>Per 20 m Coverage-Gain Field, About 120 FPS</td>
+<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/samples-dark.svg"><img src="assets/numbers/samples.svg" height="48" alt="10⁶"></picture><br>Training Samples, Each Labelled by a Simulation Oracle</td>
+<td align="center" width="25%"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/numbers/baselines-dark.svg"><img src="assets/numbers/baselines.svg" height="48" alt="8"></picture><br>Baselines in One Simulator, Run From the Same Spawns</td>
+</tr>
+</table>
 
 <sub>From the paper: the larger held-out maps are Medium Office 6 and Large Office 7 (Table 3), and the speed is Table 2's.</sub>
 
