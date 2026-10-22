@@ -2,18 +2,7 @@
 
 ## Citation
 
-```bibtex
-@misc{dosi2026intelx,
-  title  = {IntelX: Autonomous Indoor Exploration via Local Coverage Gain
-            Prediction and Structure-Aware Planning},
-  author = {Dosi, Saurav and Kadosh, Itay and Xiang, Yu},
-  year   = {2026},
-  note   = {Code: \url{https://github.com/IRVLUTD/IntelX}}
-}
-```
-
-`CITATION.cff` in the repository holds the same reference, and GitHub's
-"Cite this repository" button reads it.
+Coming soon. The BibTeX for the paper will be posted here once it is on arXiv.
 
 ## Licenses
 

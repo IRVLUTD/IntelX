@@ -39,7 +39,6 @@ docs/                  this documentation, built with MkDocs (mkdocs.yml)
 docs/assets/           the wordmark, the figures and the README's images
 .github/workflows/     the tests, run on every push, the documentation site, and
                        releases from version tags (notes in .github/release-notes/)
-CITATION.cff           how to cite this repository
 ```
 
 ## Modules

@@ -110,15 +110,7 @@ against.
 
 ## Citation
 
-```bibtex
-@misc{dosi2026intelx,
-  title  = {IntelX: Autonomous Indoor Exploration via Local Coverage Gain
-            Prediction and Structure-Aware Planning},
-  author = {Dosi, Saurav and Kadosh, Itay and Xiang, Yu},
-  year   = {2026},
-  note   = {Code: \url{https://github.com/IRVLUTD/IntelX}}
-}
-```
+Coming soon. The BibTeX for the paper will be posted here once it is on arXiv.
 
 ## Getting Started
 

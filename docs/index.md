@@ -66,7 +66,7 @@ Every method runs in one 2D simulator that casts its laser rays in CUDA kernels.
 <a href="benchmark/"><span class="ix-route-number">03</span><span><strong>The Benchmark</strong><small>The paired protocol, every baseline and the MapEx service.</small></span><span aria-hidden="true">↗</span></a>
 <a href="training/"><span class="ix-route-number">04</span><span><strong>Training the Regressor</strong><small>Collect coverage data, train the U-Net and evaluate it.</small></span><span aria-hidden="true">↗</span></a>
 <a href="code/"><span class="ix-route-number">05</span><span><strong>Code Map</strong><small>The layout, every module and the tests.</small></span><span aria-hidden="true">↗</span></a>
-<a href="citation/"><span class="ix-route-number">06</span><span><strong>Citation and Licenses</strong><small>How to cite IntelX, and the licences of what it builds on.</small></span><span aria-hidden="true">↗</span></a>
+<a href="citation/"><span class="ix-route-number">06</span><span><strong>Citation and Licenses</strong><small>The citation, coming with the arXiv paper, and the licenses of what IntelX builds on.</small></span><span aria-hidden="true">↗</span></a>
 </div>
 
 </div>
