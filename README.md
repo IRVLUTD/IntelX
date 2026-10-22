@@ -19,12 +19,12 @@
 
 <br>
 
-<img src="assets/buttons/arxiv.svg" height="33" alt="arXiv (Coming Soon)">
-<a href="https://irvlutd.github.io/IntelX/"><img src="assets/buttons/project-page.svg" height="33" alt="Project Page"></a>
-<a href="https://irvlutd.github.io/IntelX/#demo"><img src="assets/buttons/live-demo.svg" height="33" alt="Live Demo"></a>
-<a href="https://irvlutd.github.io/IntelX/#video"><img src="assets/buttons/video.svg" height="33" alt="Video"></a>
-<a href="https://utdallas.box.com/s/stgu95mdcf3p7tgp5z5a53pcxiuwrplu"><img src="assets/buttons/weights-maps.svg" height="33" alt="Weights &amp; Maps"></a>
-<a href="#citation"><img src="assets/buttons/bibtex.svg" height="33" alt="BibTeX"></a>
+<img src="assets/buttons/arxiv.svg" height="30" alt="arXiv (Coming Soon)">
+<a href="https://irvlutd.github.io/IntelX/"><img src="assets/buttons/project-page.svg" height="30" alt="Project Page"></a>
+<a href="https://irvlutd.github.io/IntelX/#demo"><img src="assets/buttons/live-demo.svg" height="30" alt="Live Demo"></a>
+<a href="https://irvlutd.github.io/IntelX/#video"><img src="assets/buttons/video.svg" height="30" alt="Video"></a>
+<a href="https://utdallas.box.com/s/stgu95mdcf3p7tgp5z5a53pcxiuwrplu"><img src="assets/buttons/weights-maps.svg" height="30" alt="Weights &amp; Maps"></a>
+<a href="#citation"><img src="assets/buttons/bibtex.svg" height="30" alt="BibTeX"></a>
 
 <br>
 <br>
@@ -55,6 +55,37 @@ coverage-gain regressor, the policy, and every baseline the paper compares
 against.
 
 <div align="center">
+
+<table>
+<tr>
+<th width="33%"><img src="assets/icons/map.svg" width="20" alt=""> Map Completion</th>
+<th width="33%"><img src="assets/icons/robot.svg" width="20" alt=""> End-to-End Policies</th>
+<th width="33%"><img src="assets/icons/target.svg" width="20" alt=""> IntelX</th>
+</tr>
+<tr>
+<td align="center"><i>“What does the unseen space look like?”</i></td>
+<td align="center"><i>“Where should I go?”</i></td>
+<td align="center"><b><i>“How much new space would I gain by standing there?”</i></b></td>
+</tr>
+<tr>
+<td>Synthesizes geometry with a generative model, paying in parameters, data and latency for detail the planner never consumes.</td>
+<td>Folds perception and strategy into one network that needs interaction data and gives no account of its decisions.</td>
+<td>A supervised regression target with a simulation oracle. No generative model, and directly actionable.</td>
+</tr>
+<tr>
+<td align="center"><sub>MapEx · UPEN · IG-Hector</sub></td>
+<td align="center"><sub>Reinforcement and imitation learning</sub></td>
+<td align="center"><sub>One U-Net · One field · Two planners</sub></td>
+</tr>
+</table>
+
+| **>20%** | **8.1 ms** | **10<sup>6</sup>** | **8** |
+|:-:|:-:|:-:|:-:|
+| shorter path to 99% coverage<br>than every baseline that<br>finishes the larger maps | per 20 m coverage-gain field,<br>about 120 FPS | training samples, each<br>labelled by a simulation oracle | baselines in one simulator,<br>run from the same spawns |
+
+<sub>From the paper: the larger held-out maps are Medium Office 6 and Large Office 7 (Table 3), and the speed is Table 2's.</sub>
+
+<br>
 
 <img src="assets/intelx-in-action.gif" width="85%" alt="IntelX exploring KTH Small Office 1 from 5% to 99% coverage: the predicted coverage-gain field in the rotating local window, the angular components and junction nodes the planners read from it, frontier fallbacks, and the path travelled.">
 
@@ -126,7 +157,7 @@ spawns.
 | `ours` | IntelX | the coverage-gain field, the local and the global planner |
 | `local_only` | IntelX, Local Only | the ablation without the global planner |
 | `random` `nearest` `cost_utility` `geom_ig` | Random Frontier, Nearest Frontier, Cost-Utility, Geometric IG | geometry only |
-| `frontier` | Frontier (AutoX) | the deployed reference |
+| `frontier` | Frontier (AutoX) | our previous work, a dynamic-window frontier explorer |
 | `mapex` `upen` `hectoraug` | MapEx, UPEN, IG-Hector | need [MapEx](https://github.com/castacks/MapEx), linked at `third_party/MapEx`, and its [service](services/README.md) |
 
 <sub>[docs/benchmark.md](docs/benchmark.md) has each method's goal rule, the

@@ -14,7 +14,7 @@ Ten entries are registered, nine methods and one ablation.
 | Key | In the Paper |
 |---|---|
 | `random` `nearest` `cost_utility` `geom_ig` | Random Frontier, Nearest Frontier, Cost-Utility, Geometric IG: the four geometry-only frontier variants |
-| `frontier` | Frontier (AutoX), the deployed reference |
+| `frontier` | Frontier (AutoX), our previous work, a dynamic-window frontier explorer |
 | `ours` | IntelX |
 | `local_only` | IntelX, Local Only: the ablation with the local planner alone |
 | `mapex` `upen` `hectoraug` | MapEx, UPEN, IG-Hector |

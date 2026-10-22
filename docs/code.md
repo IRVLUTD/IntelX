@@ -58,7 +58,7 @@ assets/                the wordmark, the overview figure and the in-action GIF
 | `intelx.sim.simulator` | the 2D simulator and its CUDA ray casting |
 | `intelx.sim.simulator_astar` | an older copy of the simulator. Only its `optimized_astar_path_planner` is used, by the policy and the baselines |
 | `intelx.planners` | `global_priority` for junction and branch bookkeeping, `rrt` and `rrt_star` for UPEN |
-| `intelx.baselines` | `simple` for the four geometry-only variants, `tier1` for the three prediction methods, `frontier` for the deployed reference |
+| `intelx.baselines` | `simple` for the four geometry-only variants, `tier1` for the three prediction methods, `frontier` for our previous work, the dynamic-window frontier explorer |
 | `intelx.probes` | timing checks, not used by the benchmark |
 | `intelx.data.driver` | spawn sampling and the coverage shows for one map |
 | `intelx.data.ring_collector` | the persistent GPU workers that run a show and record what it observes. The controller initialises them once and passes `skip_worker_init=True`; `driver` lets each pool process initialise its own, which the initialiser makes a no-op once they exist |
