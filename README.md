@@ -39,7 +39,10 @@
 <br>
 <br>
 
-<img src="assets/intelx-overview.webp" width="95%" alt="IntelX overview: a robot in an unseen 2D environment builds its map from a 220-degree laser scan; a robot-centred 20 m window of that map goes through a U-Net that returns a coverage-gain heatmap; the heatmap's angular components are candidate directions, and multi-peaked structure marks a junction with branches; the local and global planner commits to those branches, falls back to frontier centroids when it is stuck, and explores the whole floor along a short path.">
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="assets/intelx-overview.webp">
+  <img src="assets/intelx-overview.gif" width="95%" alt="IntelX overview: a robot in an unseen 2D environment builds its map from a 220-degree laser scan; a robot-centred 20 m window of that map goes through a U-Net that returns a coverage-gain heatmap; the heatmap's angular components are candidate directions, and multi-peaked structure marks a junction with branches; the local and global planner commits to those branches, falls back to frontier centroids when it is stuck, and explores the whole floor along a short path.">
+</picture>
 
 <sub>From the robot's scan and local window to the predicted coverage gain, its candidate directions and junctions, and the explored floor.</sub>
 
