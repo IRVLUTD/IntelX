@@ -87,9 +87,9 @@ against.
 
 <br>
 
-<img src="assets/intelx-in-action.gif" width="85%" alt="IntelX exploring KTH Small Office 1 from 5% to 99% coverage: the predicted coverage-gain field in the rotating local window, the angular components and junction nodes the planners read from it, frontier fallbacks, and the path travelled.">
+<img src="assets/results-large-office7.gif" width="100%" alt="All nine methods exploring KTH Large Office 7 from the same spawn, replayed side by side and synchronized by distance travelled, with their coverage curves below. IntelX reaches 99% coverage at 1,687 m; IG-Hector, UPEN, MapEx and Cost-Utility reach it later, and Random Frontier, Nearest Frontier, Geometric IG and Frontier (AutoX) stop short.">
 
-<sub>IntelX exploring KTH Small Office 1, from the supplementary video. Run it on a floor plan of your own in the <a href="https://irvlutd.github.io/IntelX/#demo">live demo</a>.</sub>
+<sub>All nine methods on KTH Large Office 7 from the same spawn, synchronized by distance travelled: the Results replay of the <a href="https://irvlutd.github.io/IntelX/#results">project page</a>, which has the other maps too. Run IntelX on a floor plan of your own in the <a href="https://irvlutd.github.io/IntelX/#demo">live demo</a>.</sub>
 
 <br>
 
