@@ -22,10 +22,6 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Local notes that never ship.
-.anonymity-denylist
-ANONYMITY.md
-
 # Run artefacts.
 results/*
 !results/.gitkeep
