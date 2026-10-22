@@ -50,11 +50,9 @@
 
 <br>
 
-IntelX explores unseen indoor spaces with one lightweight U-Net. The network
-regresses, over a robot-frame occupancy image, how much new area the sensor
-would gain from each nearby goal. The planner reads angular components of that
-field as candidate directions, reads multi-peaked structure as a junction, and
-commits to branches weakest first. This repository holds the simulator, the
+IntelX is an autonomous indoor exploration method. One lightweight U-Net
+predicts a coverage-gain heatmap around the robot, and the planner follows the
+direction candidates it reveals. This repository holds the simulator, the
 coverage-gain regressor, the policy, and every baseline the paper compares
 against.
 
