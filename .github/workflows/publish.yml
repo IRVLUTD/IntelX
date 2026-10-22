@@ -1,0 +1,20 @@
+name: publish
+
+# The site is deployed by the documentation workflow on main, which takes this
+# branch as the site root and adds the documentation under docs/. A push here
+# asks it to deploy again.
+on:
+  push:
+    branches: [gh-pages]
+
+permissions:
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run the documentation workflow on main
+        run: gh workflow run docs.yml --repo "$GITHUB_REPOSITORY" --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
