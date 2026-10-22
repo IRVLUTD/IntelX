@@ -3,7 +3,8 @@ name: release
 # A tag such as v0.1.0 builds the package and publishes a GitHub release with
 # the sdist and the wheel attached, as RPX's release workflow does (without its
 # PyPI step). The release text is .github/release-notes/<tag>.md when that
-# file exists, followed by GitHub's generated changelog.
+# file exists, followed by GitHub's generated changelog. Release text keeps
+# every line break, so write each paragraph and bullet on one line.
 #
 #     git tag -a v0.1.0 -m "IntelX v0.1.0"
 #     git push origin v0.1.0
