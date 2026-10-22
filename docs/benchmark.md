@@ -69,7 +69,7 @@ conda activate lama
 python services/mapex_service.py --mapex-root third_party/MapEx --port 5555
 ```
 
-[`services/README.md`](../services/README.md) has the other ways to run it and the
+The [MapEx Service](mapex-service.md) page has the other ways to run it and the
 wire protocol.
 
 Two sensing regimes are defined and the mapping between them is deliberate.

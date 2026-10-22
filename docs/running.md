@@ -1,29 +1,6 @@
 # Running IntelX
 
-## Install
-
-Python **3.11** and an NVIDIA GPU. The simulator casts its rays in numba
-`@cuda.jit` kernels, so the GPU is required. Inference falls back to CPU, the
-simulator does not.
-
-```bash
-git clone https://github.com/IRVLUTD/IntelX.git
-cd IntelX
-python3.11 -m venv .venv
-. .venv/bin/activate
-pip install -r requirements.txt
-pip install -e .
-```
-
-`requirements.txt` is the frozen environment this release was tested in. It
-takes torch 2.11 and torchvision 0.26 in their CUDA 12.8 builds from the
-PyTorch index, which run on every GPU from Turing (`sm_75`) to Blackwell
-(`sm_120`), and `numba-cuda`, which brings the CUDA compiler the kernels are
-built with, so no system CUDA toolkit is needed. On an older GPU, install a
-torch build that supports it first, then `pip install -e .`, which resolves
-the rest from `pyproject.toml`, the loose set of packages this tree imports.
-
-Then put the trained checkpoint in `weights/`, see the [README](../README.md#getting-started).
+Install IntelX and add the checkpoint first, as in [Get Started](getting-started.md).
 
 ## One Episode
 

@@ -35,10 +35,10 @@ weights/               checkpoints, see weights/README.md
 results/               run output, ignored by git
 services/              mapex_service.py, the bridge to MapEx
 third_party/MapEx/     MapEx, a git submodule, for the three prediction baselines
-docs/                  training, running, the benchmark and this code map
-.github/workflows/     the tests, run on every push
+docs/                  this documentation, built with MkDocs (mkdocs.yml)
+docs/assets/           the wordmark, the figures and the README's images
+.github/workflows/     the tests, run on every push, and the documentation site
 CITATION.cff           how to cite this repository
-assets/                the wordmark, the overview figure and the in-action GIF
 ```
 
 ## Modules
