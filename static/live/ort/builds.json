@@ -1,0 +1,56 @@
+{
+ "version": "1.30.0",
+ "cpu": {
+  "script": "ort.wasm.min.js",
+  "mjs": "ort-wasm-simd-threaded.mjs",
+  "wasm": "ort-wasm-simd-threaded.wasm",
+  "bytes": 14239897,
+  "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2",
+  "parts": [
+   {
+    "file": "cpu_0.png",
+    "bytes": 9437184,
+    "width": 2048,
+    "height": 1536,
+    "size": 2668561
+   },
+   {
+    "file": "cpu_1.png",
+    "bytes": 4802713,
+    "width": 2048,
+    "height": 782,
+    "size": 1713413
+   }
+  ]
+ },
+ "gpu": {
+  "script": "ort.webgpu.min.js",
+  "mjs": "ort-wasm-simd-threaded.asyncify.mjs",
+  "wasm": "ort-wasm-simd-threaded.asyncify.wasm",
+  "bytes": 26781914,
+  "sha256": "39f9f0894d478800487ed9f7dbe92618498db320cf55c8e3d89adff8dce658da",
+  "parts": [
+   {
+    "file": "gpu_0.png",
+    "bytes": 9437184,
+    "width": 2048,
+    "height": 1536,
+    "size": 3208647
+   },
+   {
+    "file": "gpu_1.png",
+    "bytes": 9437184,
+    "width": 2048,
+    "height": 1536,
+    "size": 2322793
+   },
+   {
+    "file": "gpu_2.png",
+    "bytes": 7907546,
+    "width": 2048,
+    "height": 1288,
+    "size": 2404579
+   }
+  ]
+ }
+}

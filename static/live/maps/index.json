@@ -1,0 +1,47 @@
+[
+ {
+  "id": "small_office3",
+  "title": "Small Office 3",
+  "group": "KTH Test",
+  "file": "small_office3.png",
+  "spawn": [
+   676.0,
+   145.0,
+   -1.5286624785552587
+  ],
+  "seed": 1003,
+  "width": 1164,
+  "height": 396,
+  "area_m2": 667
+ },
+ {
+  "id": "houseexpo_small_2",
+  "title": "HouseExpo Small 2",
+  "group": "Out of Distribution",
+  "file": "houseexpo_small_2.png",
+  "spawn": [
+   440.0,
+   175.0,
+   0.65
+  ],
+  "seed": 1000,
+  "width": 1128,
+  "height": 585,
+  "area_m2": 1102
+ },
+ {
+  "id": "msd_medium_3",
+  "title": "MSD Medium 3",
+  "group": "Out of Distribution",
+  "file": "msd_medium_3.png",
+  "spawn": [
+   223.0,
+   131.0,
+   0.65
+  ],
+  "seed": 1000,
+  "width": 585,
+  "height": 547,
+  "area_m2": 244
+ }
+]

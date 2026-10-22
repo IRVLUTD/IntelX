@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="IntelX predicts how much new area every nearby goal would reveal with one lightweight U-Net, and plans indoor exploration on the junctions it reads from the same field.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IntelX">
+<meta property="og:description" content="IntelX predicts how much new area every nearby goal would reveal with one lightweight U-Net, and plans indoor exploration on the junctions it reads from the same field.">
+<meta property="og:url" content="https://irvlutd.github.io/IntelX/">
+<meta property="og:image" content="https://irvlutd.github.io/IntelX/static/img/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<title>IntelX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<link rel="stylesheet" href="static/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to Content</a>
+
+<!--
+  PLACEHOLDERS to fill before going public. Search this file for data-placeholder:
+    ARXIV_LINK    the arXiv abstract page
+    ARXIV_ID      the arXiv identifier in the BibTeX
+  Author photos live in static/img/authors/ as square JPGs (400 x 400 px). If a
+  photo is missing, the initials are shown instead.
+-->
+
+<nav class="topnav" id="topnav" aria-label="Sections">
+  <div class="topnav__inner">
+    <a class="topnav__brand" href="#top" aria-label="IntelX, back to top"><img src="static/img/intelx-wordmark.svg" alt="IntelX" width="118" height="27"></a>
+    <div class="topnav__links">
+      <a href="#abstract">Abstract</a>
+      <a href="#demo">Demo</a>
+      <a href="#overview">Overview</a>
+      <a href="#video">Video</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#citation">BibTeX</a>
+    </div>
+    <a class="topnav__cta" href="https://github.com/IRVLUTD/IntelX">Code</a>
+  </div>
+</nav>
+
+<!-- ============================ TITLE BLOCK ============================ -->
+<header class="hero" id="top">
+  <div class="wrap wrap--wide">
+    <img class="hero__wordmark" src="static/img/intelx-wordmark.svg" alt="IntelX" width="330" height="77">
+    <h1 class="hero__title">IntelX: Autonomous Indoor Exploration via Local Coverage Gain Prediction and Structure-Aware&nbsp;Planning</h1>
+    <p class="hero__venue">Under Review</p>
+
+    <ul class="authors" aria-label="Authors">
+      <li><a class="author" href="https://sauravdosi.com/"><span class="avatar" data-initials="SD"><img src="static/img/authors/saurav-dosi.jpg" alt="" width="400" height="400" loading="eager"></span><span class="author__name">Saurav Dosi<sup>1,2</sup></span></a></li>
+      <li><a class="author" href="https://www.linkedin.com/in/itay-kadosh/"><span class="avatar" data-initials="IK"><img src="static/img/authors/itay-kadosh.jpg" alt="" width="400" height="400" loading="eager"></span><span class="author__name">Itay Kadosh<sup>3</sup></span></a></li>
+      <li><a class="author" href="https://yuxng.github.io/"><span class="avatar" data-initials="YX"><img src="static/img/authors/yu-xiang.jpg" alt="" width="400" height="400" loading="eager"></span><span class="author__name">Yu Xiang<sup>1</sup></span></a></li>
+    </ul>
+    <p class="hero__affil"><sup>1</sup><a href="https://labs.utdallas.edu/irvl/">Intelligent Robotics and Vision Lab</a>, The University of Texas at Dallas &emsp; <sup>2</sup>Cornell University &emsp; <sup>3</sup>University of Florida</p>
+
+    <div class="actions">
+      <span class="btn btn--soon" aria-disabled="true" data-placeholder="ARXIV_LINK">
+        <span class="ico-arxiv" aria-hidden="true">arXiv</span><span>arXiv (Coming Soon)</span></span>
+      <a class="btn" href="https://github.com/IRVLUTD/IntelX">
+        <img class="emoji" src="static/img/icons/laptop.svg" alt="" width="18" height="18"><span>Code</span></a>
+      <a class="btn" href="#video">
+        <img class="emoji" src="static/img/icons/clapper.svg" alt="" width="18" height="18"><span>Video</span></a>
+      <a class="btn" href="#citation">
+        <img class="emoji" src="static/img/icons/link.svg" alt="" width="18" height="18"><span>BibTeX</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- =============================== TEASER =============================== -->
+<!-- A live replay of the paper's Large Office 7 trial, drawn by static/js/race.js -->
+<section class="teaser" aria-label="Teaser">
+  <div class="wrap wrap--wide">
+    <figure class="hero__stage" id="hero" data-base="static/hero/large_office7/" data-run="ours" data-rival="hectoraug" style="margin:0">
+      <div class="stage">
+        <canvas class="stage__canvas" id="hero-canvas" aria-label="IntelX exploring Large Office 7. Walls appear as the robot's laser first reaches them."></canvas>
+        <div class="hud hud--tl">
+          <span class="hud__map">Large Office 7</span>
+          <span class="hud__meta">7,669 m² · KTH Test · Seed 1004</span>
+        </div>
+        <div class="hud hud--tr" aria-live="off">
+          <div class="hud__stat"><span class="hud__val" id="hero-cov">0.0<small>%</small></span><span class="hud__key">Coverage</span></div>
+          <div class="hud__stat"><span class="hud__val hud__val--path" id="hero-path">0<small> m</small></span><span class="hud__key">Path</span></div>
+        </div>
+        <div class="hud hud--bl" id="hero-rival">
+          <span class="rival__dot" aria-hidden="true"></span>
+          <span>IG-Hector at this distance: <b id="hero-rival-cov">0.0%</b></span>
+        </div>
+        <div class="hud hud--br"><span class="scalebar" id="hero-scale"><i></i><span>10 m</span></span></div>
+        <div class="hero__done" id="hero-done" hidden>
+          <span class="done__big"><img src="static/img/icons/check.svg" alt="" width="27" height="27">99% at 1,688 m</span>
+          <span class="done__small">IG-Hector, the closest baseline that also finishes, needs 2,916 m</span>
+        </div>
+        <div class="stage__progress" aria-hidden="true"><i id="hero-bar"></i></div>
+      </div>
+    </figure>
+    <p class="teaser__cap">IntelX predicts how much new area every nearby goal would reveal with a single lightweight U-Net, and reads the junctions of the building from the same field to plan its route.</p>
+    <p class="teaser__note"><span>Replay of the paper's Large Office 7 trial (Fig. 6). Walls appear the moment the robot's laser first reaches them.</span><button type="button" class="linkbtn" id="hero-toggle" aria-pressed="false">Pause</button></p>
+  </div>
+</section>
+
+<!-- ============================== ABSTRACT ============================== -->
+<section class="section" id="abstract" aria-labelledby="abstract-h">
+  <div class="wrap">
+    <h2 class="h2" id="abstract-h">Abstract</h2>
+    <div class="text">
+      <p>Autonomous exploration requires a robot to decide where to move next based on what it has observed so far. Classical frontier methods only use the geometry of the occupancy grid and commit to targets that yield little new coverage at the cost of longer traversal. Recent learned methods instead complete the unseen map with a generative model, which synthesizes geometry the planner never consumes and risks hallucinating structure. In this paper, we show that exploration needs only an estimate of how much new area a candidate goal would reveal. We propose IntelX, a framework that learns this estimate with a single lightweight U-Net, regressing coverage gain densely over a robot-frame occupancy image under supervision from a simulation oracle that measures the coverage actually obtained from every reachable nearby goal. The network returns the field over a 20 m window in 8.1 ms, and because its input is an occupancy image it can potentially adapt to other sensor configurations. We show that the same field also exposes topological structure, with junctions appearing as multi-peaked angular mass. The IntelX planner commits to their branches weakest-first, clearing terminating branches before corridors that stay reachable later. Our experiments on three held-out floor-plans and three out-of-distribution corpora show that IntelX reaches the 99% coverage target on large maps over paths more than 20% shorter than any of the eight baselines that also reach it, achieving high area covered per meter and per second efficiencies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== LIVE DEMO ============================== -->
+<!-- IntelX in the visitor's browser: static/js/live_core.js (simulator and
+     planner, ported from the release) and static/js/live.js (this section).
+     The model is downloaded only when Start is pressed. -->
+<section class="section section--band" id="demo" aria-labelledby="demo-h">
+  <div class="wrap">
+    <h2 class="h2" id="demo-h">Live Demo</h2>
+    <div class="text">
+      <p>Run IntelX on a floor plan of your own, entirely in your browser. Pick an example, draw walls and rooms, or upload a map (a ROS map, or any image with dark walls on a light floor), then press Start. The page downloads the trained U-Net (26 MB) and runs it on your graphics card through WebGPU, or on the processor where WebGPU is unavailable. The simulator and both planners are a direct port of the released code, with the benchmark's sensor and settings, and nothing you draw or upload leaves your computer.</p>
+      <p class="live__note"><strong>Note:</strong> the demo runs a smaller, compressed copy of the IntelX network, its weights stored at 8 bits instead of 32 to keep the download small. It may be less accurate than the full model evaluated in the paper, and by default it also predicts less often than the paper's runs (every 30 cm, or 60 cm on a processor, instead of 5 cm), so results here can differ from the paper's.</p>
+    </div>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="live" id="live">
+      <div class="live__top">
+        <div class="seg seg--tabs live__src" role="tablist" aria-label="Map source">
+          <button type="button" role="tab" data-src="examples" aria-selected="true">Examples</button>
+          <button type="button" role="tab" data-src="draw">Draw</button>
+          <button type="button" role="tab" data-src="upload">Upload</button>
+        </div>
+        <div class="live__panel" data-panel="examples">
+          <label class="sr" for="live-example">Example map</label>
+          <select class="live__example" id="live-example"></select>
+        </div>
+        <div class="live__panel live__tools" data-panel="draw" hidden>
+          <div class="seg" role="group" aria-label="Drawing tool">
+            <button type="button" data-tool="wall" aria-pressed="true">Wall</button>
+            <button type="button" data-tool="room">Room</button>
+            <button type="button" data-tool="erase">Erase</button>
+            <button type="button" data-tool="spawn">Spawn</button>
+          </div>
+          <button type="button" class="linkbtn live__undo">Undo</button>
+          <button type="button" class="linkbtn live__new">New 30 × 20 m Plan</button>
+        </div>
+        <div class="live__panel live__upload" data-panel="upload" hidden>
+          <label class="live__filebtn">Choose a Map<input type="file" class="live__file" accept=".png,.jpg,.jpeg,.pgm,image/*"></label>
+          <label class="live__mpplabel">Metres per pixel <input type="number" class="live__mpp" value="0.05" min="0.005" max="1" step="0.005"></label>
+        </div>
+      </div>
+      <div class="live__stage">
+        <canvas class="live__canvas" aria-label="The floor plan, and IntelX exploring it"></canvas>
+        <div class="hud hud--tl"><span class="hud__map live__mapname">Map</span><span class="hud__meta live__mapmeta"></span></div>
+        <div class="hud hud--tr" aria-live="off">
+          <div class="hud__stat"><span class="hud__val live__cov">0.0<small>%</small></span><span class="hud__key">Coverage</span></div>
+          <div class="hud__stat"><span class="hud__val hud__val--path live__path">0<small> m</small></span><span class="hud__key">Path</span></div>
+        </div>
+        <div class="hud hud--bl live__decision" hidden></div>
+      </div>
+      <div class="live__ctl">
+        <button type="button" class="btn live__run" aria-pressed="false"><svg class="ico i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg><svg class="ico i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg><span>Start</span></button>
+        <button type="button" class="linkbtn live__reset">Reset</button>
+        <div class="live__pacewrap"><span class="live__lbl">Predict Every</span>
+          <div class="seg live__pace" role="group" aria-label="Distance between predictions">
+            <button type="button" data-px="1">5 cm (Paper)</button>
+            <button type="button" data-px="6" aria-pressed="true">30 cm</button>
+            <button type="button" data-px="12">60 cm</button>
+          </div>
+        </div>
+        <label class="live__check"><input type="checkbox" class="live__showfield" checked> Predicted Field</label>
+        <label class="live__check"><input type="checkbox" class="live__showmarks" checked> Planner</label>
+      </div>
+      <div class="race__chart live__chart" role="img" aria-label="Coverage against distance travelled"></div>
+      <p class="race__status live__status" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== OVERVIEW ============================== -->
+<section class="section" id="overview" aria-labelledby="overview-h">
+  <div class="wrap">
+    <h2 class="h2" id="overview-h">Overview</h2>
+    <p class="lede">To decide where to go next, a robot does not need to imagine the rooms it has not seen. It needs one number for every goal around it: how much new area it would reveal by standing there. IntelX learns that number with a single lightweight U-Net, and reads the structure of the building straight off the same field.</p>
+
+    <div class="questions">
+      <article class="q">
+        <span class="tile" aria-hidden="true"><img src="static/img/icons/map.svg" alt="" width="24" height="24"></span>
+        <p class="q__who">Map Completion</p>
+        <p class="q__ask">“What does the unseen space look like?”</p>
+        <p class="q__how">Synthesizes geometry with a generative model, paying in parameters, data and latency for detail the planner never consumes.</p>
+        <p class="q__eg">MapEx · UPEN · IG-Hector</p>
+      </article>
+      <article class="q">
+        <span class="tile" aria-hidden="true"><img src="static/img/icons/robot.svg" alt="" width="24" height="24"></span>
+        <p class="q__who">End-to-End Policies</p>
+        <p class="q__ask">“Where should I go?”</p>
+        <p class="q__how">Folds perception and strategy into one network that needs interaction data and gives no account of its decisions.</p>
+        <p class="q__eg">Reinforcement and imitation learning</p>
+      </article>
+      <article class="q q--ours">
+        <span class="tile" aria-hidden="true"><img src="static/img/icons/target.svg" alt="" width="24" height="24"></span>
+        <p class="q__who">IntelX</p>
+        <p class="q__ask">“How much new space would I gain by standing there?”</p>
+        <p class="q__how">A supervised regression target with a simulation oracle. No generative model, and directly actionable.</p>
+        <p class="q__eg">One U-Net · One field · Two planners</p>
+      </article>
+    </div>
+
+    <ul class="stats" aria-label="Headline results">
+      <li class="stat"><span class="stat__val">37<small>%</small></span><span class="stat__lbl">Shorter path to 99% coverage than UPEN on Large Office 7</span></li>
+      <li class="stat"><span class="stat__val">21<small>%</small></span><span class="stat__lbl">Shorter than MapEx on Medium Office 6</span></li>
+      <li class="stat"><span class="stat__val">34<small>%</small></span><span class="stat__lbl">Shorter than Frontier (AutoX) on Small Office 3</span></li>
+      <li class="stat"><span class="stat__val">8.1<small> ms</small></span><span class="stat__lbl">Per 20 m coverage-gain field, about 120 FPS</span></li>
+    </ul>
+    <p class="note">Path to 99% (P99) among the methods that complete each held-out map, 20 trials per map (Table 3).</p>
+  </div>
+</section>
+
+<!-- =============================== VIDEO =============================== -->
+<section class="section section--band" id="video" aria-labelledby="video-h">
+  <div class="wrap wrap--wide">
+    <h2 class="h2" id="video-h">Video</h2>
+    <figure class="player" style="margin-top:0">
+      <video controls preload="metadata" playsinline poster="static/video/intelx_overview_poster.jpg" aria-label="IntelX supplementary video">
+        <source src="static/video/intelx_overview.mp4" type="video/mp4">
+      </video>
+    </figure>
+  </div>
+</section>
+
+<!-- =============================== METHOD =============================== -->
+<section class="section" id="method" aria-labelledby="method-h">
+  <div class="wrap">
+    <h2 class="h2" id="method-h">Method</h2>
+    <div class="text">
+      <p>Local decisions are learned, since the value of a nearby goal turns on geometry too subtle to hand-design. Global decisions are not, since indoor structure is discrete and legible: junctions are read off the same field as multi-peaked angular structure and managed with explicit memory rather than a second network.</p>
+    </div>
+    <figure class="figure">
+      <button class="zoom" type="button" data-full="static/img/fig1_overview.webp" aria-label="Enlarge the method overview figure">
+        <img src="static/img/fig1_overview.webp" width="2063" height="932" alt="IntelX overview. A robot in an unseen 2D environment observes with a 220 degree laser. Its local window is turned into a robot-frame occupancy image, a U-Net predicts a coverage heatmap, the field splits into ranked components and junction branches, and the local and global planners use them, falling back to frontier centroids when stuck.">
+      </button>
+      <figcaption><b>Overview.</b> The robot observes with a 220° laser, focuses on a 20 m window in its own frame, asks the predictor how much more it can see, reads candidate directions and junctions off the field, and plans locally and globally, falling back to frontier centroids when stuck.</figcaption>
+    </figure>
+
+    <h3 class="h3">Architecture</h3>
+  </div>
+
+  <!-- Guided tour of the architecture figure, driven by static/js/site.js -->
+  <div class="wrap wrap--wide">
+    <figure class="tour" id="tour" data-src="static/img/fig2_architecture.webp" data-w="4030" data-h="1680" style="margin-top:0">
+      <div class="tour__stage">
+        <div class="tour__camera" id="tour-camera">
+          <img src="static/img/fig2_architecture.webp" width="4030" height="1680" alt="IntelX architecture. (a) Dataset collection: train and test maps, map complexity, 2D simulation into a local window, shows, seasons and episodes producing pairs of occupancy images and coverage-gain fields. (b) The coverage prediction model, a U-Net with a ResNet-34 encoder trained with a weighted MSE loss. (c) The local and global policy: the single component mode, pose sampling for junction verification, junctions with branches, and the global planner over frontiers and active branches.">
+          <svg class="tour__flows" viewBox="0 0 4030 1680" aria-hidden="true"><g id="tour-flows"></g></svg>
+        </div>
+      </div>
+      <div class="tour__bar">
+        <div class="tour__ctl">
+          <button type="button" class="iconbtn" id="tour-play" aria-pressed="true" aria-label="Pause the tour">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+          </button>
+          <div class="tour__steps" id="tour-steps" role="tablist" aria-label="Tour stops"></div>
+          <button type="button" class="linkbtn" data-full="static/img/fig2_architecture.webp" id="tour-full">Full Figure</button>
+        </div>
+        <div class="tour__cap" id="tour-cap" aria-live="polite"></div>
+      </div>
+    </figure>
+  </div>
+
+  <!-- ------------------------------ dataset ------------------------------ -->
+  <div class="wrap" id="dataset">
+    <h3 class="h3">The IntelX Dataset</h3>
+    <div class="text">
+      <p>A custom 2D simulator ray-casts a 220° laser of 662 beams out to 10 m over 18 floor plans, standardized to 0.05 m per pixel and sealed watertight. A show walks outward from a seeded spawn through 10 seasons. At each season, 157 goals on a 2.5 m ring are replayed as episodes from the frozen state, and the coverage gain Δρ that each one actually yields is recorded along its path. Every season becomes one training pair of a robot-frame occupancy image I<sub>t</sub> and its field H<sub>t</sub>: 10<sup>6</sup> pairs from 100,000 shows, collected by up to 720 concurrent simulators.</p>
+    </div>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="stepper" data-stepper aria-label="How one training pair is made">
+      <ol class="stepper__list">
+        <li><button type="button" data-src="static/img/dataset/a_source_map.webp"><b>Floor Plan</b><span>Standardized to 0.05 m per pixel and sealed watertight.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/b_simulator_scan.webp"><b>Laser Scan</b><span>A 2D simulator casts 662 beams over a 220° field of view, out to 10 m.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/f_spawn_points.webp"><b>Spawns</b><span>Shows start from spawns drawn by seeded rejection sampling.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/g_show_seasons.webp"><b>Show and Seasons</b><span>A show walks outward through 10 seasons, each origin 2.5–10 m from the last, under one persistent explored mask.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/h_season_goal_ring.webp"><b>Goal Ring</b><span>157 goals on a 2.5 m ring, each inside verified free space with line of sight from the origin.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/i_episode_traces.webp"><b>Episodes</b><span>Every goal is replayed from the frozen state, and the gain Δρ is recorded along its straight path.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/j1_pair_input.webp"><b>Input</b><span>The robot-frame occupancy image I<sub>t</sub>, 400 × 400 pixels over 20 × 20 m.</span></button></li>
+        <li><button type="button" data-src="static/img/dataset/j2_pair_target.webp" data-key="static/img/dataset/j3_colorbar.webp"><b>Target</b><span>The field H<sub>t</sub> of coverage gain, the supervision the U-Net regresses.</span></button></li>
+      </ol>
+      <figure class="stepper__view">
+        <div class="stepper__frame"><img alt="" width="685" height="685"></div>
+        <img class="stepper__key" alt="Colour scale for coverage gain Δρ, from 0 to about 0.05" width="730" height="213" hidden>
+      </figure>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="alloc" id="alloc">
+      <div class="alloc__chart" id="alloc-chart" role="img" aria-label="Shows allocated to each of the 18 training maps, from 133 for the small AWS house to 16,115 for Large Office 4"></div>
+      <p class="note">Shows per training map (Table 1), allocated in proportion to a complexity score κ that balances room count against explorable area, so the large offices that carry junction structure are not starved. Hover a bar for its rooms, area and κ.</p>
+    </div>
+
+    <!-- ----------------------------- predictor ----------------------------- -->
+    <h3 class="h3" id="predictor">Coverage Gain Predictor</h3>
+    <div class="split">
+      <div class="text">
+        <p>Given the robot's local scan image I<sub>t</sub>, the network regresses the expected coverage gain Δρ at every pixel of the 20 m window. It is a U-Net with a ResNet-34 encoder at depth 5, adapted for single-channel input and trained from scratch. Four decoder stages of width 256, 128, 64 and 32 with bilinear upsampling and skip connections end in a sigmoid over the 400 × 400 window, 24.4 M parameters in all.</p>
+        <p>Training uses a weighted MSE (λ = 10<sup>8</sup>), which keeps the gradients of gains as small as 10<sup>−4</sup> clear of the FP16 denormal range. Because the input is an occupancy image, the same predictor can be retrained for other ranges, fields of view and beam counts, confining the sim-to-real gap to how occupancy is rendered.</p>
+      </div>
+      <figure class="figure">
+        <button class="zoom" type="button" data-full="static/img/fig3_prediction.webp" aria-label="Enlarge the prediction examples">
+          <img src="static/img/fig3_prediction.webp" width="1030" height="612" loading="lazy" alt="Predicted fields against ground truth in four situations: at the initial spawn the prediction is bidirectional and correct, partly explored it predicts gain behind the robot, inside an explored room it predicts low coverage, and at a junction the ranking of two directions is reversed.">
+        </button>
+        <figcaption>Predicted Ĥ<sub>t</sub> against ground truth H, each on its own scale. (a)–(c) are correct; at the junction in (d) the ranking of two directions is reversed.</figcaption>
+      </figure>
+    </div>
+    <div class="tablewrap">
+      <table class="tbl" id="table2">
+        <caption>Prediction quality on the three held-out maps, masked to the nonzero target. ε<sub>pk</sub> is the error of the field maximum; α<sub>30</sub> counts peaks matched within 30°.</caption>
+      </table>
+    </div>
+
+    <!-- ---------------------------- local planner ---------------------------- -->
+    <h3 class="h3" id="planner">Local Planner</h3>
+    <div class="text">
+      <p>The field is smoothed and its mass gathered into a 72-bin angular histogram around the robot. Its peaks split the window into angular components, and when a single component survives, its intensity-weighted centroid becomes the goal. The global maximum sits deep inside a room, and one centroid over the whole field lands almost on the robot, since opposing lobes cancel. The component centroid is the only goal far enough to be worth travelling to and near enough to explore the room completely.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="tbl tbl--small">
+        <caption>The four candidate goals of Fig. 4(d), at one junction.</caption>
+        <thead><tr><th scope="col">Goal</th><th scope="col">Distance [m]</th><th scope="col">Δρ</th></tr></thead>
+        <tbody>
+          <tr><td>(a) Global Maximum</td><td>2.5</td><td>0.0168</td></tr>
+          <tr><td>(b) Weighted Centroid</td><td>0.3</td><td>0.0085</td></tr>
+          <tr class="is-ours"><td>(c) Component Centroid (IntelX)</td><td class="best">1.5</td><td class="best">0.0168</td></tr>
+          <tr><td>(d) Frontier Centroid</td><td>6.6</td><td>0.0168</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <figure class="figure">
+      <button class="zoom" type="button" data-full="static/img/fig4_local_planner.webp" aria-label="Enlarge the local planner figure">
+        <img src="static/img/fig4_local_planner.webp" width="2681" height="1350" loading="lazy" alt="Local planner ablation. Four candidate goals at one junction: the global maxima of the field, the weighted centroid of the whole field, the component centroid used by IntelX, and the frontier centroid. Right: the local planner alone stalls at 89.9 percent coverage while the predicted field collapses.">
+      </button>
+      <figcaption>(a)–(d) Four goals at one junction; the component centroid μ<sub>C<sub>g</sub></sub> matches the best gain at the shortest distance. (e)–(h) Alone, the local planner stalls at 89.9%: the field collapses from max Δρ = 2.1 × 10<sup>−1</sup> to 3.8 × 10<sup>−4</sup>, and recovery needs a target outside the window, which only the global planner can supply.</figcaption>
+    </figure>
+
+    <!-- --------------------------- global planner --------------------------- -->
+    <h3 class="h3">Global Planner</h3>
+    <div class="text">
+      <p>The global planner turns multi-peaked structure in the field into persistent, rankable branches. A junction registers only when at least 5 of 11 poses, the robot and 10 virtual poses on a 0.5 m circle, see more than one component. A branch's strength predicts what lies beyond it: a weak branch ends in a room or a dead end, while a strong one opens onto a corridor. Clearing the weak branch first costs a short detour now instead of a long return later.</p>
+    </div>
+  </div>
+  <div class="wrap wrap--wide">
+    <div class="stepper" data-stepper aria-label="A junction from detection to departure">
+      <ol class="stepper__list">
+        <li><button type="button" data-src="static/img/global/s1_local_prediction.webp"><b>Local Field</b><span>The predictor's field around the robot.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s2_components.webp"><b>Components</b><span>Three angular components survive the gates: a junction candidate.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s3_virtual_poses.webp"><b>Virtual Poses</b><span>Ten virtual poses on a 0.5 m circle, plus the robot, are predicted as one batch with the laser off.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s4_consensus_strip.webp" data-wide><b>Consensus</b><span>The junction registers only if at least 5 of the 11 poses see more than one component. Here all 11 agree.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s5_node_branches.webp"><b>Node and Branches</b><span>The node sits at the mean of the agreeing poses; branch bearings within 30° merge into ranked branches.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s6_active_branches.webp"><b>Frontiers Claim Branches</b><span>Each frontier is claimed by the branch that reaches it most cheaply, forming the active set.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s7_locked_branch.webp"><b>Weakest First</b><span>Near the node the robot locks onto the weakest unvisited branch, and the lock holds until the branch is consumed.</span></button></li>
+        <li><button type="button" data-src="static/img/global/s8_final_trajectory.webp"><b>Pass Through</b><span>With every branch visited, the node is passed through and exploration moves on.</span></button></li>
+      </ol>
+      <figure class="stepper__view">
+        <div class="stepper__frame"><img alt="" width="685" height="685"></div>
+      </figure>
+    </div>
+  </div>
+
+  <!-- ---------------------------- in action ---------------------------- -->
+  <div class="wrap">
+    <h3 class="h3">IntelX in Action</h3>
+    <figure class="clip">
+      <video muted loop playsinline preload="none" poster="static/video/intelx_in_action_poster.jpg" data-autoplay aria-label="IntelX exploring Small Office 1 with its predicted field, junctions and branches drawn live">
+        <source src="static/video/intelx_in_action.mp4" type="video/mp4">
+      </video>
+      <figcaption>The predicted field in the world frame, its ranked components, the junctions and their branches, and the frontier fallback, as the robot sees them.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- =============================== RESULTS =============================== -->
+<section class="section section--band" id="results" aria-labelledby="results-h">
+  <div class="wrap">
+    <h2 class="h2" id="results-h">Results</h2>
+    <div class="text">
+      <p>Each trial draws one spawn by seeded rejection sampling and every method runs from that pose, so a difference between methods is attributable to the policy rather than the start. Below, the trials of the paper's Fig. 6 and of the supplementary video are replayed for all nine methods, synchronized by distance travelled: the three held-out KTH floor plans, seven out-of-distribution maps from HouseExpo, Modified Swiss Dwellings and AWS RoboMaker, and the fourth floor of the ECSS building at UT Dallas, a map built with SLAM from a real robot's laser scans. Pick a map, then play or scrub; hovering over a method highlights its coverage curve.</p>
+    </div>
+  </div>
+
+  <div class="wrap wrap--wide">
+    <div class="race" id="race">
+      <div class="race__maps" role="tablist" aria-label="Map">
+        <div class="race__group"><span class="race__grp">KTH Test</span>
+          <button type="button" role="tab" data-map="small_office3">Small Office 3</button>
+          <button type="button" role="tab" data-map="50010536_PLAN4">Medium Office 6</button>
+          <button type="button" role="tab" data-map="large_office7" aria-selected="true">Large Office 7</button>
+        </div>
+        <div class="race__group"><span class="race__grp">Out of Distribution</span>
+          <button type="button" role="tab" data-map="houseexpo_medium_1">HouseExpo Medium 1</button>
+          <button type="button" role="tab" data-map="houseexpo_large_1">HouseExpo Large 1</button>
+          <button type="button" role="tab" data-map="houseexpo_large_3">HouseExpo Large 3</button>
+          <button type="button" role="tab" data-map="msd_medium_2">MSD Medium 2</button>
+          <button type="button" role="tab" data-map="msd_medium_3">MSD Medium 3</button>
+          <button type="button" role="tab" data-map="msd_large_1">MSD Large 1</button>
+          <button type="button" role="tab" data-map="hospital">AWS Hospital</button>
+        </div>
+        <div class="race__group"><span class="race__grp">Real SLAM Map</span>
+          <button type="button" role="tab" data-map="ecss_corridor">ECSS 4th Floor, UTD</button>
+        </div>
+      </div>
+      <div class="race__ctl">
+        <button type="button" class="iconbtn iconbtn--solid" id="race-play" aria-pressed="false" aria-label="Play">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+        </button>
+        <label class="race__scrub" for="race-scrub"><span class="sr">Distance travelled</span>
+          <input type="range" id="race-scrub" min="0" max="1000" step="0.5" value="0">
+        </label>
+        <output class="race__dist" id="race-dist" for="race-scrub">0 m</output>
+        <div class="seg" role="group" aria-label="Playback speed">
+          <button type="button" data-speed="0.5">½×</button>
+          <button type="button" data-speed="1" aria-pressed="true">1×</button>
+          <button type="button" data-speed="2">2×</button>
+        </div>
+      </div>
+      <div class="race__grid" id="race-grid"></div>
+      <div class="race__chart" id="race-chart" role="img" aria-label="Coverage against distance travelled for every method on this map"></div>
+      <div class="race__legend" id="race-legend"></div>
+      <p class="race__status" id="race-status" role="status"></p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="tables">
+      <div class="tables__head">
+        <h3 class="h3" style="margin-top:48px">Held-Out Floor Plans</h3>
+        <div class="seg seg--tabs" role="tablist" aria-label="Map" id="t3-tabs"></div>
+      </div>
+      <div class="tablewrap"><table class="tbl" id="table3"></table></div>
+      <p class="note">20 trials per map; P99 averages only the runs that reach ρ<sup>⋆</sup> = 99%. Among the methods that complete a map, IntelX takes the shortest path on all three.</p>
+
+      <div class="tables__head tables__head--spaced">
+        <h3 class="h3">Out-of-Distribution Corpora</h3>
+        <div class="seg seg--tabs" role="tablist" aria-label="Corpus" id="t4-tabs"></div>
+      </div>
+      <div class="tablewrap"><table class="tbl" id="table4"></table></div>
+      <p class="note">10 trials per map. Primed path lengths are per-map ratios to the best method, so 1.00 means shortest.</p>
+    </div>
+
+    <div class="text" style="margin-top:36px">
+      <p>MapEx is the closest competitor, and the comparison is not uniform over a run. Below 80% coverage it leads IntelX on roughly half the runs, since predicted completions pay off while large unseen regions remain. Above 90%, its curve flattens as the remaining gain falls below its prediction resolution, and IntelX overtakes. The same effect favors MapEx on smaller maps, where the floor plan is close to its prediction horizon and the late phase is short.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== ABLATIONS ============================== -->
+<section class="section" id="ablations" aria-labelledby="ablations-h">
+  <div class="wrap">
+    <h2 class="h2" id="ablations-h">Ablations</h2>
+  </div>
+  <!-- Each ablation is a replay like the baselines race, drawn by static/js/race.js
+       from static/ablation/<name>/ (built by build_ablation.py) -->
+  <div class="wrap wrap--wide">
+    <figure class="ablation">
+      <div class="race" data-base="static/ablation/branch_order/" aria-label="Branch order and field ablation on KTH Medium Office 6">
+        <div class="race__ctl">
+          <button type="button" class="iconbtn iconbtn--solid" aria-pressed="false" aria-label="Play">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+          </button>
+          <label class="race__scrub" for="abl-branch-scrub"><span class="sr">Distance travelled</span>
+            <input type="range" id="abl-branch-scrub" min="0" max="1000" step="0.5" value="0">
+          </label>
+          <output class="race__dist" for="abl-branch-scrub">0 m</output>
+          <div class="seg" role="group" aria-label="Playback speed">
+            <button type="button" data-speed="0.5">½×</button>
+            <button type="button" data-speed="1" aria-pressed="true">1×</button>
+            <button type="button" data-speed="2">2×</button>
+          </div>
+        </div>
+        <div class="race__grid"></div>
+        <div class="race__chart" role="img" aria-label="Coverage against distance travelled for IntelX and the two ablations"></div>
+        <div class="race__legend"></div>
+        <p class="race__status" role="status"></p>
+      </div>
+      <figcaption><b>Weakest First, With the Learned Field.</b> On Medium Office 6, IntelX reaches 99% in 516 m. Committing to the strongest branch first needs 679 m, 32% more, and replacing the learned field with geometric information gain stops at 98.2% after 1,060 m.</figcaption>
+    </figure>
+
+    <figure class="ablation">
+      <div class="race" data-base="static/ablation/local_global/" aria-label="Local planner only against local and global planning on KTH Small Office 1">
+        <div class="race__ctl">
+          <button type="button" class="iconbtn iconbtn--solid" aria-pressed="false" aria-label="Play">
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg>
+          </button>
+          <label class="race__scrub" for="abl-local-scrub"><span class="sr">Distance travelled</span>
+            <input type="range" id="abl-local-scrub" min="0" max="1000" step="0.5" value="0">
+          </label>
+          <output class="race__dist" for="abl-local-scrub">0 m</output>
+          <div class="seg" role="group" aria-label="Playback speed">
+            <button type="button" data-speed="0.5">½×</button>
+            <button type="button" data-speed="1" aria-pressed="true">1×</button>
+            <button type="button" data-speed="2">2×</button>
+          </div>
+        </div>
+        <div class="race__grid"></div>
+        <div class="race__chart" role="img" aria-label="Coverage against distance travelled for the local planner alone and for IntelX"></div>
+        <div class="race__legend"></div>
+        <p class="race__status" role="status"></p>
+      </div>
+      <figcaption><b>Local Alone Stalls.</b> On Small Office 1 the local planner alone stalls at 91.1% after 88 m, planning goal after goal without moving. With junction memory and the frontier fallback, IntelX reaches 99% in 124 m.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== CITATION ============================== -->
+<section class="section" id="citation" aria-labelledby="citation-h">
+  <div class="wrap">
+    <h2 class="h2" id="citation-h">BibTeX</h2>
+    <div class="bib">
+      <button type="button" class="bib__copy" id="bib-copy">Copy</button>
+<pre id="bibtex" data-placeholder="ARXIV_ID"><code>@misc{dosi2026intelx,
+  title         = {IntelX: Autonomous Indoor Exploration via Local Coverage
+                   Gain Prediction and Structure-Aware Planning},
+  author        = {Dosi, Saurav and Kadosh, Itay and Xiang, Yu},
+  year          = {2026},
+  eprint        = {ARXIV_ID},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.RO}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p><a href="https://labs.utdallas.edu/irvl/">Intelligent Robotics and Vision Lab</a>, Department of Computer Science, The University of Texas at Dallas</p>
+    <p>Code: <a href="https://github.com/IRVLUTD/IntelX">github.com/IRVLUTD/IntelX</a></p>
+    <p>Icons: <a href="https://github.com/jdecked/twemoji">Twemoji</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a></p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button type="button" class="lightbox__close" aria-label="Close">×</button>
+  <img alt="">
+</div>
+
+<script src="static/js/site.js"></script>
+<script src="static/js/race.js"></script>
+<script src="static/js/live_core.js"></script>
+<script src="static/js/live.js"></script>
+</body>
+</html>
